@@ -1,1 +1,1954 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#071d36">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="Vardhaan Immigration — Study, Work, Permanent Residency and Visitor Visa guidance for USA, Canada, Australia, New Zealand and UK.">
+<title>Vardhaan Immigration | Your Dream. Our Direction.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#071d36;--blue:#0878e8;--cyan:#31b9ff;--ink:#102b49;--muted:#60758d;
+  --bg:#f7fbff;--white:#fff;--line:#dce9f5;
+  --shadow:0 18px 55px rgba(8,44,82,.12);
+  --shadow-lg:0 28px 70px rgba(8,44,82,.18);
+  --radius:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:"DM Sans",sans-serif;color:var(--ink);background:#fff;line-height:1.6;overflow-x:hidden;
+  transition:background .35s ease,color .35s ease}
+h1,h2,h3{font-family:Manrope,sans-serif;line-height:1.08}
+a{text-decoration:none;color:inherit}
+button{font:inherit;border:0;cursor:pointer;background:none;color:inherit}
+img{max-width:100%;display:block}
+.container{width:min(1180px,92%);margin:auto}
+::selection{background:var(--blue);color:#fff}
+
+/* ============================================================
+   MOTION SYSTEM
+   ============================================================ */
+
+/* Scroll progress bar */
+.scroll-bar{position:fixed;top:0;left:0;height:3px;width:0;z-index:999;
+  background:linear-gradient(90deg,var(--blue),var(--cyan),#7de3c6);
+  transition:width .08s linear;
+  box-shadow:0 0 12px rgba(49,185,255,.5)}
+
+/* Cursor spotlight — enhanced */
+.cursor-glow{position:fixed;width:520px;height:520px;border-radius:50%;pointer-events:none;z-index:1;
+  background:radial-gradient(circle,rgba(48,185,255,.14),transparent 62%);
+  transform:translate(-50%,-50%);transition:opacity .4s;mix-blend-mode:multiply}
+
+/* Custom cursor: small dot + lagging ring */
+.cursor-dot,.cursor-ring{position:fixed;pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);will-change:transform,width,height;border-radius:50%}
+.cursor-dot{width:6px;height:6px;background:var(--blue);
+  transition:width .25s,height .25s,background .25s,opacity .3s}
+.cursor-ring{width:34px;height:34px;border:1.5px solid rgba(8,120,232,.5);
+  transition:width .35s cubic-bezier(.2,.8,.2,1),height .35s cubic-bezier(.2,.8,.2,1),
+    border-color .3s,background .3s,opacity .3s;background:transparent}
+.cursor-ring.hovered{width:56px;height:56px;
+  border-color:var(--blue);background:rgba(8,120,232,.08)}
+.cursor-dot.hovered{width:0;height:0}
+.cursor-ring.pressed{width:26px;height:26px;background:rgba(8,120,232,.2)}
+@media(hover:none),(max-width:900px){.cursor-dot,.cursor-ring,.cursor-glow{display:none}}
+[data-theme="dark"] .cursor-dot{background:#31b9ff}
+[data-theme="dark"] .cursor-ring{border-color:rgba(49,185,255,.6)}
+[data-theme="dark"] .cursor-ring.hovered{border-color:#31b9ff;background:rgba(49,185,255,.1)}
+
+/* Button ripple effect */
+.btn{position:relative;overflow:hidden;isolation:isolate}
+.ripple{position:absolute;border-radius:50%;pointer-events:none;
+  background:rgba(255,255,255,.55);transform:scale(0);
+  animation:rippleAnim .7s cubic-bezier(.2,.8,.2,1) forwards;z-index:-1}
+.btn.light .ripple,.option-btn .ripple,.faq-q .ripple,.country-pill .ripple{background:rgba(8,120,232,.35)}
+@keyframes rippleAnim{to{transform:scale(4);opacity:0}}
+
+/* Text scramble effect */
+.scramble-char{opacity:.35;transition:opacity .3s,color .3s}
+.scramble-char.revealed{opacity:1}
+
+/* Word-by-word scroll reveal for headings */
+.scroll-word{display:inline-block;opacity:.12;transform:translateY(0);
+  transition:opacity .45s cubic-bezier(.2,.8,.2,1),transform .45s cubic-bezier(.2,.8,.2,1),color .3s;
+  will-change:opacity,transform;margin-right:.22em}
+.scroll-word.highlight{opacity:1;transform:translateY(-2px);color:var(--blue)}
+[data-theme="dark"] .scroll-word.highlight{color:#31b9ff}
+
+/* Split-text entry animation */
+h2 .sw{display:inline-block;opacity:0;transform:translateY(110%) rotate(4deg);
+  transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1);
+  transition-delay:calc(var(--i) * 55ms);will-change:transform,opacity}
+h2.sw-in .sw{opacity:1;transform:none}
+
+/* Card glare on 3D tilt */
+.glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),
+    rgba(255,255,255,.35),transparent 40%);
+  transition:opacity .3s;z-index:5;mix-blend-mode:overlay}
+.path-card:hover .glare,.service:hover .glare,.story:hover .glare,
+.dest-card:hover .glare{opacity:1}
+
+/* Page entrance choreography */
+.page-enter{opacity:0;transform:translateY(10px)}
+.page-enter.done{opacity:1;transform:none;
+  transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+
+/* NAV */
+.nav{height:78px;display:flex;align-items:center;justify-content:space-between;
+  position:absolute;top:0;left:0;right:0;z-index:20;
+  transition:background .3s,backdrop-filter .3s,box-shadow .3s}
+.nav.scrolled{position:fixed;background:rgba(255,255,255,.82);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:0 4px 30px rgba(8,44,82,.08)}
+[data-theme="dark"] .nav.scrolled{background:rgba(2,10,22,.82);
+  box-shadow:0 4px 30px rgba(0,0,0,.4)}
+.logo{display:flex;align-items:center;gap:10px;font-family:Manrope;font-weight:800;color:var(--navy);
+  transition:color .35s ease}
+.logo-mark{width:38px;height:38px;border:3px solid var(--navy);border-radius:10px 22px 10px 22px;
+  transform:rotate(-12deg);display:grid;place-items:center;color:var(--blue);font-weight:800;
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .35s}
+.logo:hover .logo-mark{transform:rotate(0deg) scale(1.05)}
+.logo small{display:block;font-size:8px;letter-spacing:2px;color:#6d8095;margin-top:-3px}
+.navlinks{display:flex;gap:28px;font-size:14px;font-weight:600}
+.navlinks a{position:relative;padding:4px 0;transition:color .25s}
+.navlinks a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;
+  background:var(--blue);transition:width .3s cubic-bezier(.2,.8,.2,1)}
+.navlinks a:hover{color:var(--blue)}
+.navlinks a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:12px}
+
+/* THEME TOGGLE */
+.theme-toggle{width:42px;height:42px;border-radius:12px;
+  background:rgba(8,120,232,.08);border:1px solid var(--line);
+  display:grid;place-items:center;cursor:pointer;
+  transition:background .3s,transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s;
+  color:var(--navy);position:relative;overflow:hidden}
+.theme-toggle:hover{transform:rotate(15deg) scale(1.06);border-color:var(--blue)}
+.theme-toggle .sun,.theme-toggle .moon{position:absolute;transition:opacity .4s,transform .4s}
+.theme-toggle .moon{opacity:0;transform:rotate(-90deg) scale(.5)}
+[data-theme="dark"] .theme-toggle .sun{opacity:0;transform:rotate(90deg) scale(.5)}
+[data-theme="dark"] .theme-toggle .moon{opacity:1;transform:rotate(0) scale(1)}
+[data-theme="dark"] .theme-toggle{color:#31b9ff;background:rgba(49,185,255,.1);border-color:rgba(49,185,255,.3)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 26px;min-height:50px;border-radius:999px;
+  background:var(--navy);color:#fff;font-weight:700;font-size:14px;line-height:1;
+  white-space:nowrap;position:relative;
+  box-shadow:0 8px 22px rgba(7,29,54,.18);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s,box-shadow .3s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(7,29,54,.25)}
+.btn.light{background:#fff;color:var(--navy);border:1px solid #cfe0ef;box-shadow:none}
+.btn.light:hover{border-color:var(--blue);color:var(--blue);box-shadow:0 10px 25px rgba(8,120,232,.15)}
+.btn.blue{background:linear-gradient(135deg,var(--blue),#1260c9)}
+.btn .arrow{position:static;width:auto;height:auto;background:transparent;color:inherit;
+  border-radius:0;display:inline;font-weight:700;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.btn:hover .arrow{transform:translateX(4px)}
+
+/* HERO */
+.hero{min-height:740px;padding-top:110px;display:flex;align-items:center;position:relative;overflow:hidden;
+  background:linear-gradient(115deg,#edf8ff 0%,#fff 48%,#eaf6ff 100%);
+  transition:background .5s ease}
+.hero::before{content:"";position:absolute;width:700px;height:700px;border-radius:50%;
+  right:-180px;top:-80px;background:radial-gradient(circle,rgba(48,185,255,.18),transparent 66%);
+  animation:breathe 9s ease-in-out infinite;
+  will-change:transform}
+.hero::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;
+  left:-160px;bottom:-160px;background:radial-gradient(circle,rgba(125,227,198,.18),transparent 66%);
+  animation:breathe 11s ease-in-out infinite reverse;
+  will-change:transform}
+@keyframes breathe{50%{transform:scale(1.15)}}
+.hero-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:50px;align-items:center;
+  position:relative;z-index:2}
+.hero-text{position:relative;z-index:6}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;
+  background:#e8f5ff;color:#1472c8;font-weight:800;font-size:11px;letter-spacing:1.4px;
+  text-transform:uppercase;margin-bottom:18px;transition:background .35s,color .35s}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue);
+  animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.hero h1{font-size:clamp(40px,5.2vw,66px);letter-spacing:-2.4px;color:var(--navy);max-width:620px;
+  transition:color .35s}
+.hero h1 span.grad{background:linear-gradient(90deg,var(--blue),var(--cyan),var(--blue));
+  background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:gradientSlide 4s linear infinite}
+@keyframes gradientSlide{to{background-position:-200% 0}}
+.hero p{color:var(--muted);font-size:17px;max-width:540px;margin:22px 0 28px;transition:color .35s}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.reveal-word{display:inline-block;opacity:0;transform:translateY(38px) rotate(4deg);
+  animation:wordIn .8s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes wordIn{to{opacity:1;transform:none}}
+
+/* MAP */
+.hero-art{position:relative;min-height:560px;perspective:1600px;perspective-origin:50% 45%}
+.map-scene{position:absolute;inset:0;transform-style:preserve-3d;
+  transition:transform .5s cubic-bezier(.2,.8,.2,1);
+  display:flex;align-items:center;justify-content:center}
+.map-disc{position:relative;width:100%;max-width:660px;aspect-ratio:2/1;
+  border-radius:26px;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 40%, #0a2340 0%, #03101f 55%, #01060d 100%);
+  border:1px solid rgba(49,185,255,.28);
+  box-shadow:0 40px 90px rgba(7,29,54,.45),inset 0 0 100px rgba(49,185,255,.10),
+    0 0 0 1px rgba(49,185,255,.10)}
+.map-svg{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;pointer-events:auto}
+.continent{fill:rgba(49,185,255,.16);stroke:rgba(49,185,255,.55);stroke-width:.8;
+  stroke-linejoin:round;transition:fill .35s,stroke .35s,filter .35s;cursor:pointer}
+.continent:hover{fill:rgba(49,185,255,.30);stroke:rgba(125,227,198,.9);
+  filter:drop-shadow(0 0 6px rgba(49,185,255,.6))}
+.map-disc:has(.continent:hover) .continent:not(:hover){fill:rgba(49,185,255,.06);stroke:rgba(49,185,255,.22)}
+.target-country{fill:rgba(255,124,47,.35);stroke:#ff7c2f;stroke-width:1.2;
+  filter:drop-shadow(0 0 6px rgba(255,124,47,.6));
+  animation:targetPulse 3s ease-in-out infinite;cursor:pointer;transition:fill .3s}
+.target-country:hover{fill:rgba(255,124,47,.65)}
+@keyframes targetPulse{0%,100%{filter:drop-shadow(0 0 5px rgba(255,124,47,.4))}50%{filter:drop-shadow(0 0 14px rgba(255,124,47,.9))}}
+.map-grid-lines line{stroke:rgba(49,185,255,.09);stroke-width:.6}
+.map-grid-lines line.major{stroke:rgba(49,185,255,.16);stroke-width:.8}
+.marker{cursor:pointer;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.marker .ring{fill:none;stroke:#ff7c2f;stroke-width:1.4;opacity:.6;transform-origin:center;
+  animation:ringPulse 2.6s ease-out infinite}
+.marker .dot{fill:#ff7c2f;filter:drop-shadow(0 0 6px rgba(255,124,47,.9))}
+.marker .label{fill:#fff;font-size:9px;font-weight:800;letter-spacing:.6px;
+  text-anchor:middle;opacity:.9;font-family:Manrope,sans-serif;transition:opacity .3s;pointer-events:none}
+.marker:hover .dot{transform:scale(1.6);transform-origin:center}
+.marker:hover .label{opacity:1;font-size:10px}
+@keyframes ringPulse{0%{transform:scale(.6);opacity:.7}100%{transform:scale(2.2);opacity:0}}
+.origin-outer{fill:#31b9ff;opacity:.5;transform-origin:center;animation:originPulse 2.6s ease-out infinite}
+.origin-mid{fill:#31b9ff;filter:drop-shadow(0 0 10px rgba(49,185,255,1))}
+.origin-core{fill:#fff}
+@keyframes originPulse{0%{transform:scale(.4);opacity:.7}100%{transform:scale(3);opacity:0}}
+.origin-label{fill:#31b9ff;font-size:10px;font-weight:800;letter-spacing:1px;
+  font-family:Manrope,sans-serif;text-anchor:middle;filter:drop-shadow(0 0 4px rgba(49,185,255,.8))}
+.flight-arc{fill:none;stroke:#31b9ff;stroke-width:1.4;stroke-linecap:round;stroke-dasharray:5 8;
+  animation:arcFlow 2.6s linear infinite;filter:drop-shadow(0 0 3px rgba(49,185,255,.75))}
+@keyframes arcFlow{to{stroke-dashoffset:-26}}
+.plane-icon{filter:drop-shadow(0 0 4px rgba(49,185,255,.9))}
+.map-caption{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:800;
+  background:rgba(4,20,40,.75);border:1px solid rgba(49,185,255,.35);
+  padding:7px 14px;border-radius:99px;backdrop-filter:blur(6px);
+  display:flex;align-items:center;gap:8px;pointer-events:none;z-index:6;white-space:nowrap}
+.map-caption .live-dot{width:6px;height:6px;border-radius:50%;background:#20c878;
+  box-shadow:0 0 8px #20c878;animation:pulse 1.8s infinite}
+.map-tooltip{position:absolute;top:14px;left:14px;background:rgba(4,20,40,.85);
+  border:1px solid rgba(49,185,255,.4);color:#fff;padding:6px 12px;border-radius:99px;
+  font-size:11px;font-weight:700;letter-spacing:.6px;pointer-events:none;opacity:0;
+  transform:translateY(-4px);transition:opacity .25s,transform .25s;z-index:7;backdrop-filter:blur(6px)}
+.map-tooltip.show{opacity:1;transform:translateY(0)}
+.map-shadow{position:absolute;left:50%;bottom:-30px;width:70%;height:60px;
+  transform:translateX(-50%) translateZ(-40px);
+  background:radial-gradient(ellipse,rgba(7,29,54,.35),transparent 70%);
+  filter:blur(18px);pointer-events:none;z-index:0}
+
+/* FLOATING CARDS */
+.float-card{position:absolute;background:#fff;border-radius:16px;padding:12px 16px;
+  box-shadow:0 24px 55px rgba(2,6,23,.30),0 4px 12px rgba(2,6,23,.14),0 0 0 1px rgba(255,255,255,.6);
+  display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;color:var(--navy);
+  white-space:nowrap;pointer-events:none;z-index:12;will-change:transform;backface-visibility:hidden;
+  transition:background .35s,color .35s,box-shadow .35s}
+.float-card.a{right:5%;top:15%;transform:translateZ(120px) rotateY(-10deg) rotateX(4deg);
+  animation:floatA 6s ease-in-out infinite}
+.float-card.b{left:5%;bottom:15%;transform:translateZ(120px) rotateY(10deg) rotateX(-4deg);
+  animation:floatB 6s ease-in-out infinite}
+@keyframes floatA{0%,100%{transform:translateZ(120px) rotateY(-10deg) rotateX(4deg) translateY(0)}
+  50%{transform:translateZ(140px) rotateY(-10deg) rotateX(4deg) translateY(-10px)}}
+@keyframes floatB{0%,100%{transform:translateZ(120px) rotateY(10deg) rotateX(-4deg) translateY(0)}
+  50%{transform:translateZ(140px) rotateY(10deg) rotateX(-4deg) translateY(-12px)}}
+.float-card .dot{width:8px;height:8px;border-radius:50%;background:#20c878;
+  box-shadow:0 0 0 4px rgba(32,200,120,.2);animation:pulse 1.8s infinite}
+
+/* Pull-down hint (mobile hero) */
+.pull-hint{position:absolute;top:80px;left:50%;transform:translateX(-50%) translateY(-10px);
+  font-size:10px;letter-spacing:1.6px;text-transform:uppercase;font-weight:800;
+  color:var(--muted);opacity:0;transition:opacity .4s,transform .4s;pointer-events:none;
+  display:none;align-items:center;gap:6px}
+@media(max-width:900px){.pull-hint{display:flex}}
+
+/* Kinetic marquee — speed driven by scroll */
+.ticker{background:var(--navy);color:#fff;overflow:hidden;padding:14px 0;position:relative}
+.ticker-track{display:flex;gap:48px;white-space:nowrap;
+  animation:marquee 28s linear infinite;font-weight:700;font-size:13px;letter-spacing:.5px;
+  will-change:transform}
+.ticker-track span{display:inline-flex;align-items:center;gap:12px;opacity:.85}
+.ticker-track span::before{content:"✦";color:var(--cyan)}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker.fast .ticker-track{animation-duration:14s}
+
+/* TRUST */
+.trust{background:#fff;border-top:1px solid #e7f0f7;border-bottom:1px solid #e7f0f7;
+  transition:background .35s,border-color .35s}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);padding:22px 0;gap:18px}
+.trust-item{display:flex;align-items:center;gap:12px;transition:transform .3s}
+.trust-item:hover{transform:translateX(4px)}
+.trust-icon{width:38px;height:38px;border-radius:12px;background:#edf7ff;display:grid;
+  place-items:center;color:var(--blue);font-weight:800;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1),background .35s}
+.trust-item:hover .trust-icon{transform:rotate(-10deg) scale(1.1)}
+.trust-item b{display:block;font-size:13px}
+.trust-item span{font-size:11px;color:var(--muted)}
+
+/* PARTNERS MARQUEE */
+.partners{background:#fff;padding:26px 0;border-bottom:1px solid #e7f0f7;
+  overflow:hidden;transition:background .35s,border-color .35s}
+.partners-label{text-align:center;font-size:10px;letter-spacing:2.4px;text-transform:uppercase;
+  color:var(--muted);font-weight:800;margin-bottom:16px}
+.partners-track{display:flex;gap:18px;white-space:nowrap;
+  animation:partnersScroll 42s linear infinite;padding:4px 0}
+.partners-track:hover{animation-play-state:paused}
+@keyframes partnersScroll{to{transform:translateX(-50%)}}
+.partner{display:inline-flex;align-items:center;gap:10px;
+  padding:12px 22px;border:1px solid var(--line);border-radius:99px;
+  font-size:13px;font-weight:700;color:var(--ink);background:#fff;
+  transition:border-color .3s,transform .3s,background .3s;flex-shrink:0}
+.partner:hover{border-color:var(--blue);transform:translateY(-2px)}
+.partner .p-emoji{font-size:18px;line-height:1}
+
+/* SECTIONS */
+.section{padding:90px 0;position:relative;background:#fff;transition:background .35s}
+.section.alt{background:var(--bg)}
+.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:36px}
+.section-head p{color:var(--muted);max-width:600px;font-size:14px}
+.kicker{font-size:11px;letter-spacing:2px;color:var(--blue);font-weight:800;text-transform:uppercase;
+  margin-bottom:10px;display:inline-block;position:relative}
+.reveal.visible .kicker{animation:kickerIn .8s cubic-bezier(.2,.8,.2,1) both}
+@keyframes kickerIn{0%{opacity:0;transform:translateY(8px) rotateX(45deg)}100%{opacity:1;transform:none}}
+.kicker::after{content:"";position:absolute;left:0;bottom:-6px;width:28px;height:2px;background:var(--blue);
+  transform-origin:left;animation:lineGrow .8s cubic-bezier(.2,.8,.2,1) both}
+@keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.section h2{font-size:clamp(30px,4vw,45px);color:var(--navy);transition:color .35s}
+
+/* DESTINATION SLIDER */
+.dest-slider{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(255px,1fr);gap:16px;
+  overflow-x:auto;scroll-snap-type:x mandatory;padding:5px 2px 22px;scrollbar-width:none;
+  cursor:grab;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.dest-slider.dragging{cursor:grabbing;scroll-snap-type:none}
+.dest-slider::-webkit-scrollbar{display:none}
+.dest-card{scroll-snap-align:start;min-height:355px;border-radius:20px;overflow:hidden;
+  position:relative;background:#0d2c4a;color:#fff;box-shadow:0 12px 35px rgba(7,29,54,.12);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s;
+  transform-style:preserve-3d;cursor:pointer}
+.dest-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg)}
+.dest-card.highlight{box-shadow:0 0 0 3px var(--cyan),0 24px 55px rgba(49,185,255,.35);
+  transform:translateY(-10px);animation:cardPulse 2.2s cubic-bezier(.2,.8,.2,1)}
+@keyframes cardPulse{0%{box-shadow:0 0 0 0 var(--cyan),0 24px 55px rgba(49,185,255,.35)}
+  60%{box-shadow:0 0 0 12px rgba(49,185,255,0),0 24px 55px rgba(49,185,255,.35)}}
+.dest-img{height:180px;background-size:cover;background-position:center;
+  transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.dest-card:hover .dest-img{transform:scale(1.12)}
+.dest-body{padding:18px;position:relative;z-index:2}
+.flag{font-size:22px;display:inline-block;transition:transform .4s}
+.dest-card:hover .flag{transform:scale(1.25) rotate(-8deg)}
+.dest-body h3{font-size:22px;margin:4px 0;color:#fff}
+.dest-body p{font-size:12px;opacity:.78}
+.stats{display:flex;gap:20px;margin:14px 0}
+.stats b{font-size:18px;display:block}
+.stats span{font-size:9px;opacity:.7}
+.dest-card .arrow{position:absolute;right:16px;bottom:17px;width:38px;height:38px;border-radius:50%;
+  background:#fff;color:var(--navy);display:grid;place-items:center;font-weight:800;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s}
+.dest-card:hover .arrow{transform:rotate(-45deg) scale(1.1);background:var(--cyan);color:#041a30}
+.dest-link{position:absolute;inset:0;z-index:10;border-radius:20px;outline:none}
+.slider-nav{display:flex;gap:10px;justify-content:flex-end;margin-top:6px}
+.slider-nav button{width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--line);
+  display:grid;place-items:center;font-size:16px;font-weight:800;color:var(--navy);
+  transition:transform .3s,background .3s,color .3s,border-color .3s;position:relative;overflow:hidden}
+.slider-nav button:hover{background:var(--navy);color:#fff;border-color:var(--navy);transform:scale(1.1)}
+.slider-nav button:active{transform:scale(.94)}
+
+/* PATH CARDS */
+.path-grid{display:grid;grid-template-columns:1.1fr 2fr;gap:35px;align-items:center}
+.path-copy p{color:var(--muted);margin:15px 0 25px}
+.path-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;perspective:1200px}
+.path-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s,border-color .5s,background .35s;
+  position:relative;display:block;text-decoration:none;color:inherit;transform-style:preserve-3d}
+.path-card:hover{border-color:#83c8ff;box-shadow:0 24px 55px rgba(8,44,82,.18);
+  transform:translateY(-8px) rotateX(4deg)}
+.path-card:active{transform:translateY(-2px) scale(.99)}
+.path-img{height:150px;background-size:cover;background-position:center;position:relative;
+  transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.path-img::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 45%,rgba(7,29,54,.35))}
+.path-card:hover .path-img{transform:scale(1.1) translateZ(20px)}
+.path-body{padding:20px 22px 22px;position:relative;z-index:2;transform:translateZ(30px)}
+.path-card .emoji{position:absolute;top:-26px;left:20px;width:52px;height:52px;
+  border-radius:14px;background:#fff;display:grid;place-items:center;font-size:24px;
+  box-shadow:0 8px 22px rgba(2,6,23,.14);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),background .35s;z-index:3;transform:translateZ(50px)}
+.path-card:hover .emoji{transform:translateZ(60px) scale(1.15) rotate(-8deg)}
+.path-card strong{display:block;font-size:17px;margin:22px 0 5px}
+.path-card span{font-size:12px;color:var(--muted);display:block}
+
+/* SERVICES */
+.services{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;perspective:1400px}
+.service{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#fff;
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s,border-color .5s,background .35s;
+  display:flex;flex-direction:column;transform-style:preserve-3d;position:relative}
+.service:hover{transform:translateY(-10px) rotateX(5deg);box-shadow:0 28px 65px rgba(8,44,82,.2);
+  border-color:#83c8ff}
+.service-img{height:155px;background-size:cover;background-position:center;
+  transition:transform .8s cubic-bezier(.2,.8,.2,1);position:relative}
+.service:hover .service-img{transform:scale(1.12) translateZ(20px)}
+.service-img::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 40%,rgba(7,29,54,.35))}
+.service-body{padding:22px;display:flex;flex-direction:column;flex:1;transform:translateZ(25px)}
+.service-body h3{font-size:18px}
+.service-body ul{padding-left:17px;margin:12px 0;color:var(--muted);font-size:12px}
+.service-body ul li{margin:4px 0}
+.service-body .learn{font-size:12px;font-weight:800;color:var(--blue);display:inline-flex;
+  align-items:center;gap:6px;transition:gap .3s;margin-top:auto}
+.service:hover .service-body .learn{gap:12px}
+
+/* PROCESS */
+.process{background:linear-gradient(120deg,#eef8ff,#fff);overflow:hidden;transition:background .35s}
+.process-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:45px;align-items:center}
+.process-photo{height:380px;border-radius:25px;
+  background:url("https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=1100&q=85") center/cover;
+  box-shadow:var(--shadow);position:relative;overflow:hidden;
+  transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.process-photo:hover{transform:scale(1.02)}
+.process-photo::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 40%,rgba(8,120,232,.12))}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative}
+.steps::before{content:none}
+.step{position:relative;transition:transform .4s}
+.step:hover{transform:translateY(-4px)}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;
+  display:grid;place-items:center;font-size:12px;font-weight:800;margin-bottom:12px;
+  position:relative;z-index:2;transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s}
+.step:hover .step-num{transform:scale(1.15) rotate(-6deg);background:var(--blue)}
+.step h3{font-size:15px;position:relative;z-index:2}
+.step p{font-size:11px;color:var(--muted);margin-top:5px;position:relative;z-index:2}
+.step:nth-child(1)::after{content:"";position:absolute;left:17px;top:40px;width:2px;
+  height:calc(100% - 22px);background:linear-gradient(180deg,var(--blue),var(--cyan));
+  border-radius:2px;transform-origin:top;transform:scaleY(0);
+  transition:transform 1.2s cubic-bezier(.2,.8,.2,1) .3s;pointer-events:none;z-index:1}
+.steps.active .step:nth-child(1)::after{transform:scaleY(1)}
+
+/* STORIES */
+.stories{background:linear-gradient(rgba(4,28,52,.88),rgba(4,28,52,.93)),
+  url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1800&q=85") center/cover fixed;color:#fff}
+.stories h2,.stories .kicker{color:#fff}
+.stories .kicker::after{background:var(--cyan)}
+.stories .section-head p{color:#cbd8e5}
+.story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;perspective:1400px}
+.story{background:#fff;color:var(--ink);border-radius:20px;padding:24px;
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s,background .35s;
+  position:relative;overflow:hidden;transform-style:preserve-3d}
+.story::before{content:"“";position:absolute;top:6px;right:18px;font-family:Georgia,serif;
+  font-size:80px;color:var(--blue);opacity:.08;line-height:1}
+.story:hover{transform:translateY(-8px) rotateX(4deg);box-shadow:0 28px 60px rgba(0,0,0,.3)}
+.story-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;transform:translateZ(20px)}
+.avatar{width:50px;height:50px;border-radius:50%;background-size:cover;background-position:center;
+  border:2px solid var(--blue);transition:transform .4s}
+.story:hover .avatar{transform:scale(1.08)}
+.story p{font-size:13px;color:var(--muted);font-style:italic;transform:translateZ(10px)}
+.story small{display:block;margin-top:15px;font-weight:800}
+
+/* NUMBERS */
+.numbers{display:grid;grid-template-columns:repeat(4,1fr);padding:42px 0;gap:15px}
+.number{text-align:center;border-right:1px solid var(--line);padding:8px;transition:border-color .35s}
+.number:last-child{border:0}
+.number b{font:800 36px Manrope;color:var(--blue);display:block;
+  font-variant-numeric:tabular-nums}
+.number span{display:block;color:var(--muted);font-size:12px}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+.why-list{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:25px}
+.why-item{display:flex;gap:12px;transition:transform .35s}
+.why-item:hover{transform:translateX(5px)}
+.why-item i{width:35px;height:35px;border-radius:11px;background:#eaf6ff;color:var(--blue);
+  display:grid;place-items:center;font-style:normal;flex-shrink:0;
+  transition:transform .4s,background .3s,color .3s}
+.why-item:hover i{transform:rotate(-10deg) scale(1.1);background:var(--blue);color:#fff}
+.why-item b{display:block;font-size:13px}
+.why-item span{font-size:11px;color:var(--muted)}
+.why-art{height:380px;border-radius:30px;position:relative;overflow:hidden;box-shadow:var(--shadow);
+  background:url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=85") center/cover;
+  transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.why-art:hover{transform:scale(1.03) rotate(-1deg)}
+
+/* EXPLORER + FAQ */
+.explorer{display:grid;grid-template-columns:1fr 1.5fr;gap:40px}
+.country-list{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.country-pill{padding:10px 16px;border:1px solid var(--line);background:#fff;border-radius:99px;
+  font-size:12px;font-weight:700;transition:all .3s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden}
+.country-pill:hover,.country-pill.active{background:var(--navy);color:#fff;border-color:var(--navy);
+  transform:translateY(-3px);box-shadow:0 10px 22px rgba(7,29,54,.2)}
+.country-pill:active{transform:translateY(0) scale(.96)}
+.faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px}
+.faq-list{border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line);transition:background .3s}
+.faq-item:hover{background:#fbfdff}
+.faq-q{padding:19px 6px;display:flex;justify-content:space-between;align-items:center;
+  font-weight:700;font-size:14px;cursor:pointer;gap:20px;position:relative;overflow:hidden}
+.faq-q span{font-size:22px;color:var(--blue);flex-shrink:0;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.faq-item.open .faq-q span{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;color:var(--muted);font-size:12px;
+  transition:max-height .45s cubic-bezier(.2,.8,.2,1),padding .3s;padding:0 6px}
+.faq-item.open .faq-a{max-height:200px;padding-bottom:18px}
+
+/* CONTACT */
+.contact-section{padding:90px 0;background:linear-gradient(120deg,#061c34,#0a3965);
+  color:#fff;position:relative;overflow:hidden}
+.contact-section::before{content:"";position:absolute;width:600px;height:600px;border-radius:50%;
+  right:-180px;top:-200px;background:radial-gradient(circle,rgba(48,185,255,.2),transparent 65%);
+  animation:breathe 8s ease-in-out infinite}
+.contact-section h2,.contact-section .kicker{color:#fff}
+.contact-section .kicker::after{background:var(--cyan)}
+.contact-section .section-head p{color:#cbd8e5}
+.contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;position:relative;z-index:2;align-items:start}
+.contact-info-block{display:flex;flex-direction:column;gap:14px}
+.contact-line{display:flex;align-items:center;gap:16px;padding:16px 20px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;text-decoration:none;color:#fff;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s,border-color .3s}
+a.contact-line:hover{transform:translateX(6px);background:rgba(255,255,255,.1);border-color:rgba(49,185,255,.4)}
+a.contact-line:active{transform:translateX(2px) scale(.99)}
+.ci-icon{width:44px;height:44px;border-radius:12px;background:rgba(49,185,255,.15);
+  display:grid;place-items:center;font-size:18px;flex-shrink:0;transition:transform .4s,background .3s}
+a.contact-line:hover .ci-icon{transform:scale(1.1) rotate(-6deg);background:rgba(49,185,255,.28)}
+.contact-line .ci-label{display:block;font-size:10px;letter-spacing:1.8px;
+  text-transform:uppercase;color:#8fb2d4;font-weight:800;margin-bottom:3px}
+.contact-line strong{display:block;font-size:15px;color:#fff;font-weight:700;line-height:1.35;word-break:break-word}
+.map-wrap{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 12px 30px rgba(0,0,0,.25);background:#0f172a;position:relative}
+.map-wrap iframe{display:block;width:100%;height:260px;border:0}
+.map-caption-line{display:flex;align-items:center;gap:8px;padding:12px 16px;
+  background:rgba(255,255,255,.06);border-top:1px solid rgba(255,255,255,.08);font-size:12px;color:#cbd8e5}
+.map-caption-line strong{color:#fff;font-weight:700}
+.contact-cta-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:22px;padding:32px;display:flex;flex-direction:column;gap:12px}
+.contact-cta-card h3{font-size:22px;color:#fff;margin-bottom:6px;font-family:Manrope,sans-serif}
+.contact-cta-card p{font-size:14px;color:#cbd8e5;margin-bottom:12px}
+.contact-cta-card .btn{width:100%;justify-content:center}
+.contact-cta-card .btn.solid-white{background:#fff;color:var(--navy)}
+.contact-cta-card .btn.solid-white:hover{background:var(--cyan);box-shadow:0 12px 30px rgba(49,185,255,.3)}
+.contact-cta-card .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3);box-shadow:none}
+.contact-cta-card .btn.ghost:hover{background:rgba(255,255,255,.1);color:#fff;border-color:#fff;transform:translateY(-3px)}
+
+/* FOOTER */
+footer{background:#041629;color:#b8c8d8;padding:45px 0 25px}
+.footer-grid{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:40px}
+.footer-logo{color:#fff}
+.footer-grid h4{color:#fff;margin-bottom:14px}
+.footer-grid a,.footer-grid p{font-size:12px;display:block;margin:7px 0;transition:transform .3s,color .3s}
+.footer-grid a:hover{color:var(--cyan);transform:translateX(4px)}
+.copyright{border-top:1px solid rgba(255,255,255,.1);margin-top:35px;padding-top:18px;
+  font-size:10px;display:flex;justify-content:space-between}
+
+/* FLOATING WHATSAPP */
+.wa{position:fixed;right:22px;bottom:22px;width:56px;height:56px;border-radius:50%;
+  background:#20c878;color:#fff;display:grid;place-items:center;z-index:50;
+  box-shadow:0 12px 30px rgba(32,200,120,.4);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.wa::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #20c878;
+  animation:ripple 2.4s ease-out infinite}
+@keyframes ripple{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.6);opacity:0}}
+.wa:hover{transform:scale(1.1) rotate(-8deg)}
+.wa:active{transform:scale(.94)}
+.wa svg{position:relative;z-index:2}
+
+/* MOBILE STICKY BAR */
+.mobile-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;
+  background:rgba(7,29,54,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-top:1px solid rgba(49,185,255,.2);
+  display:none;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));
+  transform:translateY(120%);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.mobile-bar.show{transform:translateY(0)}
+.mobile-bar-inner{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:500px;margin:auto}
+.mobile-bar a{display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:8px 6px;border-radius:12px;color:#fff;font-size:10px;font-weight:700;
+  letter-spacing:.3px;transition:background .25s,transform .2s;text-align:center;
+  min-height:52px;justify-content:center;position:relative;overflow:hidden}
+.mobile-bar a:hover{background:rgba(49,185,255,.15)}
+.mobile-bar a:active{transform:scale(.94)}
+.mobile-bar a.primary{background:linear-gradient(135deg,var(--blue),#1260c9)}
+.mobile-bar a span{font-size:18px;line-height:1}
+@media(max-width:900px){.mobile-bar{display:block}}
+
+/* FULL-SCREEN MOBILE MENU */
+.mobile-menu-panel{position:fixed;inset:0;z-index:150;
+  background:rgba(7,29,54,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:80px 24px 40px;
+  opacity:0;pointer-events:none;transition:opacity .4s cubic-bezier(.2,.8,.2,1)}
+.mobile-menu-panel.open{opacity:1;pointer-events:auto}
+.mobile-menu-panel nav{display:flex;flex-direction:column;gap:6px;width:100%;max-width:400px}
+.mobile-menu-panel a{font-size:26px;font-weight:800;color:#fff;font-family:Manrope,sans-serif;
+  padding:14px 0;text-align:center;border-bottom:1px solid rgba(255,255,255,.08);
+  transform:translateY(20px);opacity:0;
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s,color .3s;
+  letter-spacing:-.6px}
+.mobile-menu-panel.open a{transform:none;opacity:1}
+.mobile-menu-panel.open a:nth-child(1){transition-delay:.1s}
+.mobile-menu-panel.open a:nth-child(2){transition-delay:.16s}
+.mobile-menu-panel.open a:nth-child(3){transition-delay:.22s}
+.mobile-menu-panel.open a:nth-child(4){transition-delay:.28s}
+.mobile-menu-panel.open a:nth-child(5){transition-delay:.34s}
+.mobile-menu-panel a:hover,.mobile-menu-panel a:active{color:var(--cyan)}
+.mobile-menu-close{position:absolute;top:22px;right:22px;width:44px;height:44px;
+  border-radius:50%;background:rgba(255,255,255,.08);color:#fff;
+  display:grid;place-items:center;font-size:20px;
+  transition:background .25s,transform .3s}
+.mobile-menu-close:hover{background:rgba(255,255,255,.15);transform:rotate(90deg)}
+.mobile-menu-cta{margin-top:32px;width:100%;max-width:400px}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:200;
+  background:rgba(4,20,40,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:grid;place-items:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .4s ease}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal{width:100%;max-width:560px;max-height:90vh;overflow-y:auto;
+  background:#fff;border-radius:24px;padding:36px 32px 28px;
+  box-shadow:0 40px 100px rgba(2,6,23,.4),0 0 0 1px rgba(49,185,255,.15);
+  position:relative;transform:translateY(30px) scale(.96);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),background .35s;
+  -webkit-overflow-scrolling:touch}
+.modal-overlay.open .modal{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;
+  border-radius:50%;background:rgba(8,120,232,.08);color:var(--muted);
+  display:grid;place-items:center;font-size:18px;
+  transition:background .25s,color .25s,transform .3s}
+.modal-close:hover{background:rgba(255,80,80,.15);color:#e53935;transform:rotate(90deg)}
+.modal-progress{height:5px;background:#e8f5ff;border-radius:99px;overflow:hidden;margin-bottom:22px}
+.modal-progress-bar{height:100%;width:25%;border-radius:99px;
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.modal-step{display:none;animation:stepIn .5s cubic-bezier(.2,.8,.2,1)}
+.modal-step.active{display:block}
+@keyframes stepIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+.modal-kicker{font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--blue);font-weight:800;margin-bottom:8px}
+.modal h3{font-size:clamp(22px,3vw,28px);color:var(--navy);margin-bottom:20px;
+  font-family:Manrope,sans-serif;transition:color .35s}
+.option-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:8px}
+.option-btn{padding:14px 16px;border:2px solid var(--line);border-radius:14px;
+  background:#fff;font-size:14px;font-weight:700;color:var(--ink);
+  display:flex;align-items:center;gap:10px;justify-content:flex-start;
+  transition:all .25s cubic-bezier(.2,.8,.2,1);text-align:left;cursor:pointer;
+  position:relative;overflow:hidden;min-height:52px}
+.option-btn:hover{border-color:var(--blue);transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(8,120,232,.12)}
+.option-btn:active{transform:translateY(0) scale(.98)}
+.option-btn.selected{border-color:var(--blue);background:#e8f5ff;
+  box-shadow:0 0 0 4px rgba(8,120,232,.12)}
+.option-btn .o-emoji{font-size:20px;line-height:1}
+.input-group{position:relative;margin-bottom:12px}
+.input-group input,.input-group textarea,.input-group select{
+  width:100%;padding:14px 16px;border:2px solid var(--line);border-radius:12px;
+  font:inherit;font-size:16px;background:#fff;color:var(--ink);
+  transition:border-color .25s,box-shadow .25s,background .35s,color .35s;
+  -webkit-appearance:none;appearance:none}
+.input-group input:focus,.input-group textarea:focus,.input-group select:focus{
+  outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(8,120,232,.12)}
+.modal-nav{display:flex;justify-content:space-between;gap:12px;margin-top:22px}
+.modal-nav button{padding:13px 22px;border-radius:12px;font-weight:700;font-size:14px;
+  transition:all .3s cubic-bezier(.2,.8,.2,1);display:inline-flex;align-items:center;gap:8px;
+  min-height:48px}
+.modal-nav .mb-back{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.modal-nav .mb-back:hover{color:var(--navy);border-color:var(--navy)}
+.modal-nav .mb-next{background:linear-gradient(135deg,var(--blue),#1260c9);color:#fff;
+  box-shadow:0 10px 22px rgba(8,120,232,.3);margin-left:auto}
+.modal-nav .mb-next:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(8,120,232,.4)}
+.modal-nav .mb-next:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.modal-nav .mb-next:active{transform:translateY(0) scale(.97)}
+
+/* CONFETTI */
+.confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:9999}
+
+/* DARK MODE OVERRIDES */
+[data-theme="dark"]{
+  --bg:#0a1626;--white:#0f1e33;--ink:#e8eef5;--muted:#8fa3b8;--line:#1e3a5f;
+  --navy:#020a16;--shadow:0 18px 55px rgba(0,0,0,.5);--shadow-lg:0 28px 70px rgba(0,0,0,.65);
+}
+[data-theme="dark"] body{background:#020a16;color:#e8eef5}
+[data-theme="dark"] .hero{background:linear-gradient(115deg,#0a1626 0%,#020a16 48%,#0a1626 100%)}
+[data-theme="dark"] .hero::before{background:radial-gradient(circle,rgba(49,185,255,.13),transparent 66%)}
+[data-theme="dark"] .hero::after{background:radial-gradient(circle,rgba(125,227,198,.08),transparent 66%)}
+[data-theme="dark"] .hero h1{color:#fff}
+[data-theme="dark"] .hero p{color:#8fa3b8}
+[data-theme="dark"] .eyebrow{background:rgba(49,185,255,.12);color:#7dd3ff}
+[data-theme="dark"] .logo{color:#fff}
+[data-theme="dark"] .logo-mark{border-color:#31b9ff;color:#31b9ff}
+[data-theme="dark"] .navlinks a{color:#8fa3b8}
+[data-theme="dark"] .navlinks a:hover{color:#31b9ff}
+[data-theme="dark"] .section{background:#020a16}
+[data-theme="dark"] .section.alt{background:#0a1626}
+[data-theme="dark"] .section h2{color:#fff}
+[data-theme="dark"] .section-head p{color:#8fa3b8}
+[data-theme="dark"] .trust{background:#020a16;border-color:#1e3a5f}
+[data-theme="dark"] .trust-icon{background:rgba(49,185,255,.12)}
+[data-theme="dark"] .partners{background:#020a16;border-color:#1e3a5f}
+[data-theme="dark"] .partner{background:#0f1e33;border-color:#1e3a5f;color:#e8eef5}
+[data-theme="dark"] .partner:hover{border-color:#31b9ff;background:rgba(49,185,255,.06)}
+[data-theme="dark"] .path-card,[data-theme="dark"] .service,[data-theme="dark"] .story,
+[data-theme="dark"] .faq-item,[data-theme="dark"] .contact-cta-card,
+[data-theme="dark"] .country-pill,[data-theme="dark"] .slider-nav button{
+  background:#0f1e33;border-color:#1e3a5f;color:#e8eef5}
+[data-theme="dark"] .path-card:hover{border-color:#31b9ff}
+[data-theme="dark"] .path-card .emoji{background:#0a1626}
+[data-theme="dark"] .why-item i{background:rgba(49,185,255,.12)}
+[data-theme="dark"] .why-item:hover i{background:#31b9ff;color:#020a16}
+[data-theme="dark"] .number{border-color:#1e3a5f}
+[data-theme="dark"] .number span{color:#8fa3b8}
+[data-theme="dark"] .faq-item:hover{background:rgba(49,185,255,.03)}
+[data-theme="dark"] .faq-list{border-color:#1e3a5f}
+[data-theme="dark"] .faq-q{color:#e8eef5}
+[data-theme="dark"] .process{background:linear-gradient(120deg,#0a1626,#020a16)}
+[data-theme="dark"] .process p,[data-theme="dark"] .path-copy p{color:#8fa3b8}
+[data-theme="dark"] .step h3{color:#e8eef5}
+[data-theme="dark"] .step p{color:#8fa3b8}
+[data-theme="dark"] .float-card{background:#0f1e33;color:#e8eef5;box-shadow:
+  0 24px 55px rgba(0,0,0,.6),0 4px 12px rgba(0,0,0,.3),0 0 0 1px rgba(49,185,255,.25)}
+[data-theme="dark"] .modal{background:#0f1e33;box-shadow:
+  0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(49,185,255,.2)}
+[data-theme="dark"] .modal h3{color:#fff}
+[data-theme="dark"] .modal-progress{background:rgba(49,185,255,.12)}
+[data-theme="dark"] .option-btn{background:#0a1626;border-color:#1e3a5f;color:#e8eef5}
+[data-theme="dark"] .option-btn:hover{border-color:#31b9ff;background:rgba(49,185,255,.06)}
+[data-theme="dark"] .option-btn.selected{border-color:#31b9ff;background:rgba(49,185,255,.15);color:#fff}
+[data-theme="dark"] .input-group input,[data-theme="dark"] .input-group textarea,
+[data-theme="dark"] .input-group select{background:#0a1626;border-color:#1e3a5f;color:#e8eef5}
+[data-theme="dark"] .modal-close{background:rgba(49,185,255,.1);color:#8fa3b8}
+[data-theme="dark"] .btn.light{background:#0f1e33;border-color:#1e3a5f;color:#e8eef5}
+[data-theme="dark"] .btn.light:hover{border-color:#31b9ff;color:#31b9ff}
+[data-theme="dark"] .country-pill:hover,[data-theme="dark"] .country-pill.active{
+  background:#31b9ff;color:#020a16;border-color:#31b9ff}
+[data-theme="dark"] .slider-nav button:hover{background:#31b9ff;color:#020a16;border-color:#31b9ff}
+
+/* REVEALS */
+.reveal{opacity:0;transform:translateY(35px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),
+  transform .9s cubic-bezier(.2,.8,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),
+  transform .8s cubic-bezier(.2,.8,.2,1)}
+.stagger.visible>*{opacity:1;transform:none}
+.stagger.visible>*:nth-child(1){transition-delay:.05s}
+.stagger.visible>*:nth-child(2){transition-delay:.15s}
+.stagger.visible>*:nth-child(3){transition-delay:.25s}
+.stagger.visible>*:nth-child(4){transition-delay:.35s}
+.stagger.visible>*:nth-child(5){transition-delay:.45s}
+.stagger.visible>*:nth-child(6){transition-delay:.55s}
+.tilt{transform-style:preserve-3d;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+
+/* MOBILE MENU TRIGGER */
+.mobile-menu{display:none}
+@media(max-width:900px){
+  .navlinks{display:none}
+  .mobile-menu{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;
+    background:rgba(8,120,232,.08);color:var(--navy);font-size:22px;
+    transition:background .3s,transform .3s}
+  .mobile-menu:active{transform:scale(.92)}
+  [data-theme="dark"] .mobile-menu{color:#fff;background:rgba(49,185,255,.1)}
+}
+
+/* ============================================================
+   MOBILE OPTIMIZATION PASS
+   ============================================================ */
+@media(max-width:900px){
+  .cursor-glow,.cursor-dot,.cursor-ring{display:none}
+  .hero{padding-top:100px;min-height:auto;padding-bottom:30px}
+  .hero-grid,.path-grid,.process-grid,.why-grid,.explorer,.faq{grid-template-columns:1fr}
+  .hero-grid{gap:24px}
+  .hero-art{min-height:360px;margin-top:16px}
+  .trust-grid,.services,.numbers{grid-template-columns:repeat(2,1fr)}
+  .story-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .stories{background-attachment:scroll}
+  .float-card{font-size:11px;padding:10px 12px}
+  .float-card.a{right:3%;top:14%}
+  .float-card.b{left:3%;bottom:14%}
+  .notif-stack{left:14px;bottom:80px;max-width:calc(100vw - 100px)}
+  .contact-grid{grid-template-columns:1fr}
+  .contact-section{padding:62px 0}
+  .map-wrap iframe{height:220px}
+  .wa{bottom:80px}
+  /* Bigger tap targets */
+  .slider-nav button{width:48px;height:48px}
+  .country-pill{padding:12px 18px;font-size:13px;min-height:44px}
+  .faq-q{padding:20px 8px;min-height:56px}
+  .path-card,.service,.dest-card,.story{cursor:default}
+  /* Pause expensive marquees */
+  .partners-track{animation-duration:60s}
+  /* Reduce particles */
+  .float-card.a{animation-duration:8s}
+  .float-card.b{animation-duration:9s}
+}
+@media(max-width:560px){
+  .nav{height:64px;padding:0 4%}
+  .nav .btn{display:none}
+  .nav-right .btn{display:none}
+  .hero{padding:90px 0 40px}
+  .hero h1{font-size:36px;letter-spacing:-1.4px;line-height:1.1}
+  .hero p{font-size:15px;margin:18px 0 22px}
+  .hero-art{min-height:280px}
+  .actions{width:100%}
+  .actions .btn{flex:1;padding:14px 18px;font-size:13px}
+  .section{padding:56px 0}
+  .section-head{display:block;margin-bottom:26px}
+  .section-head .btn{margin-top:18px;width:100%}
+  .kicker{font-size:10px}
+  .section h2{font-size:28px}
+  .dest-slider{grid-auto-columns:82%;gap:12px}
+  .dest-card{min-height:340px}
+  .dest-img{height:170px}
+  .path-cards,.services,.trust-grid,.numbers,.why-list,.steps{grid-template-columns:1fr}
+  .number{border-right:0;border-bottom:1px solid var(--line);padding-bottom:15px}
+  .number b{font-size:30px}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .copyright{display:block;text-align:center}
+  .copyright span{display:block;margin-top:8px}
+  .step:nth-child(1)::after{display:none}
+  .notif-text{white-space:normal;font-size:12.5px}
+  .notif{padding:11px 12px}
+  .map-wrap iframe{height:190px}
+  .float-card{display:none}
+  .map-caption{font-size:8px;padding:5px 10px;letter-spacing:1.4px}
+  .modal{padding:26px 20px 20px;border-radius:20px}
+  .option-grid{grid-template-columns:1fr;gap:8px}
+  .option-btn{padding:14px 16px;font-size:15px}
+  .modal-nav{flex-direction:column-reverse}
+  .modal-nav button{width:100%;justify-content:center}
+  .partner{font-size:11px;padding:10px 16px}
+  .process-photo{height:240px}
+  .why-art{height:240px}
+  .map-wrap iframe{height:180px}
+  .mobile-bar a{font-size:10.5px}
+  .mobile-menu-panel a{font-size:22px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal,.stagger>*{opacity:1;transform:none}
+  h2 .sw{opacity:1;transform:none}
+  .scroll-word{opacity:1!important;transform:none!important}
+  .step:nth-child(1)::after{transform:scaleY(1)}
+  .plane-icon{display:none}
+  .cursor-dot,.cursor-ring,.cursor-glow{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- MOTION PRIMITIVES -->
+<div class="scroll-bar" id="scrollBar"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<header class="nav container" id="navbar">
+  <a class="logo" href="#"><div class="logo-mark">V</div><div>VARDHAAN<small>IMMIGRATION</small></div></a>
+  <nav class="navlinks">
+    <a href="#countries">Countries</a>
+    <a href="#services">Services</a>
+    <a href="#stories">Success Stories</a>
+    <a href="#about">About Us</a>
+    <a href="#faq">Resources</a>
+  </nav>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+      <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+    <a class="btn" href="#contact">Check Eligibility <span class="arrow">→</span></a>
+    <button class="mobile-menu" id="mobileMenuBtn" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<!-- FULL-SCREEN MOBILE MENU -->
+<div class="mobile-menu-panel" id="mobileMenuPanel">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close">✕</button>
+  <nav>
+    <a href="#countries">Countries</a>
+    <a href="#services">Services</a>
+    <a href="#stories">Success Stories</a>
+    <a href="#about">About Us</a>
+    <a href="#faq">Resources</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="btn blue mobile-menu-cta" data-open-eligibility>Check My Eligibility <span class="arrow">→</span></button>
+</div>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+ <div class="pull-hint" id="pullHint">↓ Scroll to begin</div>
+ <div class="container hero-grid">
+  <div class="hero-text">
+   <div class="eyebrow" data-scramble="Your Global Journey Partner">Your Global Journey Partner</div>
+   <h1>
+     <span class="reveal-word" style="animation-delay:.05s">Dream</span>
+     <span class="reveal-word" style="animation-delay:.15s">Bigger.</span><br>
+     <span class="reveal-word" style="animation-delay:.28s">Move</span>
+     <span class="reveal-word" style="animation-delay:.38s">Further.</span><br>
+     <span class="grad">
+       <span class="reveal-word" style="animation-delay:.55s">With</span>
+       <span class="reveal-word" style="animation-delay:.65s">Vardhaan</span>
+       <span class="reveal-word" style="animation-delay:.75s">Immigration.</span>
+     </span>
+   </h1>
+   <p class="reveal" style="transition-delay:.9s">Expert guidance for your study, work, and immigration journey to the world's most desirable destinations.</p>
+   <div class="actions reveal" style="transition-delay:1s">
+     <button class="btn blue magnetic" data-open-eligibility>Check My Eligibility <span class="arrow">→</span></button>
+     <a class="btn light magnetic" href="#countries">Explore Countries <span class="arrow">→</span></a>
+   </div>
+  </div>
+
+  <div class="hero-art reveal" id="heroArt" style="transition-delay:.4s">
+   <div class="map-scene" id="mapScene">
+    <div class="map-shadow"></div>
+    <div class="map-disc">
+     <div class="map-tooltip" id="mapTooltip">Hover a region</div>
+     <svg class="map-svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet" aria-label="Interactive world map">
+      <defs>
+       <radialGradient id="oceanGrad" cx="50%" cy="45%" r="75%">
+        <stop offset="0%" stop-color="#0a2340"/><stop offset="55%" stop-color="#03101f"/><stop offset="100%" stop-color="#01060d"/>
+       </radialGradient>
+       <filter id="glowMarker" x="-80%" y="-80%" width="260%" height="260%">
+        <feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+       </filter>
+       <filter id="glowOrigin" x="-80%" y="-80%" width="260%" height="260%">
+        <feGaussianBlur stdDeviation="3" result="b2"/><feMerge><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge>
+       </filter>
+       <path id="arc-usa" d="M 715 170 Q 480 40 250 158"/>
+       <path id="arc-ca"  d="M 715 170 Q 495 5 305 100"/>
+       <path id="arc-au"  d="M 715 170 Q 840 190 914 348"/>
+       <path id="arc-nz"  d="M 715 170 Q 890 220 986 365"/>
+       <path id="arc-uk"  d="M 715 170 Q 610 50 500 107"/>
+      </defs>
+      <rect width="1000" height="500" fill="url(#oceanGrad)"/>
+      <g class="map-grid-lines">
+       <line x1="0" y1="83" x2="1000" y2="83"/><line x1="0" y1="167" x2="1000" y2="167" class="major"/>
+       <line x1="0" y1="250" x2="1000" y2="250" class="major"/><line x1="0" y1="333" x2="1000" y2="333" class="major"/>
+       <line x1="0" y1="417" x2="1000" y2="417"/><line x1="167" y1="0" x2="167" y2="500"/>
+       <line x1="333" y1="0" x2="333" y2="500" class="major"/><line x1="500" y1="0" x2="500" y2="500" class="major"/>
+       <line x1="667" y1="0" x2="667" y2="500" class="major"/><line x1="833" y1="0" x2="833" y2="500"/>
+      </g>
+      <g class="continents" fill-rule="evenodd">
+       <path class="continent" data-region="Greenland" d="M 306 19 L 444 19 L 444 56 L 431 69 L 375 83 L 347 83 L 306 56 Z"/>
+       <path class="continent" data-region="North America" d="M 33 53 L 56 53 L 111 56 L 153 56 L 222 56 L 264 56 L 306 83 L 333 97 L 347 106 L 333 119 L 306 125 L 292 139 L 278 161 L 278 178 L 272 181 L 236 169 L 231 181 L 236 200 L 250 208 L 264 219 L 283 228 L 272 228 L 258 214 L 244 208 L 208 194 L 194 186 L 175 161 L 161 147 L 156 125 L 153 111 L 139 97 L 111 83 L 83 83 L 42 89 L 33 69 Z"/>
+       <path class="continent" data-region="South America" d="M 278 222 L 292 222 L 333 222 L 361 250 L 403 264 L 394 292 L 389 311 L 367 328 L 347 347 L 328 361 L 319 375 L 306 394 L 300 403 L 297 394 L 300 375 L 297 353 L 300 333 L 306 306 L 292 292 L 283 264 L 278 250 Z"/>
+       <path class="continent" data-region="Europe" d="M 472 131 L 472 144 L 475 147 L 486 150 L 500 144 L 508 133 L 514 131 L 528 128 L 533 144 L 542 144 L 550 139 L 556 139 L 569 144 L 578 136 L 583 125 L 578 97 L 583 83 L 569 69 L 556 56 L 542 61 L 528 69 L 514 83 L 514 97 L 508 106 L 494 114 L 486 117 L 478 128 Z"/>
+       <path class="continent" data-region="Africa" d="M 453 208 L 453 192 L 472 164 L 500 150 L 528 147 L 556 161 L 589 164 L 597 181 L 619 217 L 642 217 L 642 236 L 617 253 L 611 278 L 611 306 L 597 319 L 589 333 L 578 344 L 556 347 L 542 342 L 533 319 L 533 292 L 539 264 L 528 250 L 522 236 L 500 236 L 478 236 L 458 222 Z"/>
+       <path class="continent" data-region="Asia" d="M 583 56 L 639 56 L 694 47 L 778 33 L 889 47 L 972 56 L 1000 69 L 972 83 L 944 97 L 903 125 L 875 125 L 861 97 L 806 111 L 750 97 L 694 97 L 653 97 L 625 97 L 597 83 Z"/>
+       <path class="continent" data-region="East Asia" d="M 708 125 L 750 125 L 833 125 L 875 139 L 861 153 L 839 167 L 839 189 L 806 194 L 792 189 L 778 181 L 764 181 L 750 172 L 744 189 L 736 189 L 722 194 L 717 222 L 708 208 L 700 194 L 708 181 L 717 167 L 708 153 L 708 139 Z"/>
+       <path class="continent" data-region="India" d="M 689 186 L 700 181 L 717 167 L 744 175 L 750 189 L 756 189 L 756 194 L 750 208 L 736 217 L 722 222 L 717 228 L 711 222 L 700 208 L 694 194 Z"/>
+       <path class="continent" data-region="Middle East" d="M 583 167 L 597 153 L 625 139 L 653 139 L 667 153 L 672 172 L 661 181 L 653 189 L 633 181 L 625 208 L 622 217 L 617 208 L 611 194 L 597 172 Z"/>
+       <path class="continent" data-region="Southeast Asia" d="M 764 189 L 792 189 L 806 208 L 833 208 L 847 222 L 861 236 L 861 256 L 833 264 L 819 272 L 792 267 L 778 258 L 772 236 L 764 222 L 756 208 Z"/>
+       <path class="continent" data-region="Indonesia" d="M 764 236 L 875 236 L 889 272 L 833 278 L 764 272 Z"/>
+       <path class="continent" data-region="Australia" d="M 814 311 L 847 289 L 875 292 L 903 300 L 925 328 L 925 356 L 911 369 L 889 356 L 861 339 L 819 347 L 814 333 Z"/>
+       <path class="continent" data-region="New Zealand" d="M 978 347 L 994 356 L 992 375 L 972 378 L 964 372 L 972 361 Z M 978 364 L 986 369 L 972 381 L 964 378 Z"/>
+      </g>
+      <g class="targets">
+       <path class="target-country" data-country="Canada" d="M 250 70 L 345 65 L 350 105 L 255 110 Z" style="animation-delay:.4s"/>
+       <path class="target-country" data-country="USA" d="M 195 128 L 285 122 L 295 162 L 250 182 L 205 172 Z" style="animation-delay:.1s"/>
+       <path class="target-country" data-country="UK" d="M 487 100 L 500 96 L 505 110 L 495 118 L 487 112 Z" style="animation-delay:.7s"/>
+       <path class="target-country" data-country="Australia" d="M 830 300 L 920 300 L 925 355 L 830 355 Z" style="animation-delay:1s"/>
+       <path class="target-country" data-country="New Zealand" d="M 968 350 L 990 350 L 992 378 L 968 378 Z" style="animation-delay:1.3s"/>
+      </g>
+      <g class="arcs">
+       <path class="flight-arc" d="M 715 170 Q 480 40 250 158"/>
+       <path class="flight-arc" d="M 715 170 Q 495 5 305 100" style="animation-delay:.2s"/>
+       <path class="flight-arc" d="M 715 170 Q 840 190 914 348" style="animation-delay:.4s"/>
+       <path class="flight-arc" d="M 715 170 Q 890 220 986 365" style="animation-delay:.6s"/>
+       <path class="flight-arc" d="M 715 170 Q 610 50 500 107" style="animation-delay:.8s"/>
+      </g>
+      <g class="origin">
+       <circle class="origin-outer" cx="715" cy="170" r="14"/>
+       <circle class="origin-mid" cx="715" cy="170" r="7" filter="url(#glowOrigin)"/>
+       <circle class="origin-core" cx="715" cy="170" r="3"/>
+       <text class="origin-label" x="715" y="150">INDIA</text>
+      </g>
+      <g class="markers">
+       <g class="marker" data-country="USA" data-card="card-usa" tabindex="0" role="button" aria-label="USA">
+        <circle class="ring" cx="250" cy="158" r="8"/><circle class="dot" cx="250" cy="158" r="5" filter="url(#glowMarker)"/>
+        <text class="label" x="250" y="178" style="dominant-baseline:hanging">USA</text></g>
+       <g class="marker" data-country="Canada" data-card="card-ca" tabindex="0" role="button" aria-label="Canada">
+        <circle class="ring" cx="305" cy="100" r="8" style="animation-delay:.3s"/><circle class="dot" cx="305" cy="100" r="5" filter="url(#glowMarker)"/>
+        <text class="label" x="305" y="84">CANADA</text></g>
+       <g class="marker" data-country="UK" data-card="card-uk" tabindex="0" role="button" aria-label="UK">
+        <circle class="ring" cx="500" cy="107" r="8" style="animation-delay:.6s"/><circle class="dot" cx="500" cy="107" r="5" filter="url(#glowMarker)"/>
+        <text class="label" x="500" y="93">UK</text></g>
+       <g class="marker" data-country="Australia" data-card="card-au" tabindex="0" role="button" aria-label="Australia">
+        <circle class="ring" cx="914" cy="348" r="8" style="animation-delay:.9s"/><circle class="dot" cx="914" cy="348" r="5" filter="url(#glowMarker)"/>
+        <text class="label" x="914" y="334">AUSTRALIA</text></g>
+       <g class="marker" data-country="New Zealand" data-card="card-nz" tabindex="0" role="button" aria-label="New Zealand">
+        <circle class="ring" cx="986" cy="365" r="8" style="animation-delay:1.2s"/><circle class="dot" cx="986" cy="365" r="5" filter="url(#glowMarker)"/>
+        <text class="label" x="986" y="351">NZ</text></g>
+      </g>
+      <g class="planes">
+       <g class="plane-icon"><path d="M -9 -2.6 L 9 0 L -9 2.6 L -5 0 Z" fill="#fff"/><animateMotion dur="7s" repeatCount="indefinite" rotate="auto"><mpath href="#arc-usa"/></animateMotion></g>
+       <g class="plane-icon"><path d="M -9 -2.6 L 9 0 L -9 2.6 L -5 0 Z" fill="#fff"/><animateMotion dur="7.5s" repeatCount="indefinite" rotate="auto" begin="1.2s"><mpath href="#arc-ca"/></animateMotion></g>
+       <g class="plane-icon"><path d="M -9 -2.6 L 9 0 L -9 2.6 L -5 0 Z" fill="#fff"/><animateMotion dur="5.5s" repeatCount="indefinite" rotate="auto" begin="0.6s"><mpath href="#arc-au"/></animateMotion></g>
+       <g class="plane-icon"><path d="M -9 -2.6 L 9 0 L -9 2.6 L -5 0 Z" fill="#fff"/><animateMotion dur="6.2s" repeatCount="indefinite" rotate="auto" begin="1.8s"><mpath href="#arc-nz"/></animateMotion></g>
+       <g class="plane-icon"><path d="M -9 -2.6 L 9 0 L -9 2.6 L -5 0 Z" fill="#fff"/><animateMotion dur="5s" repeatCount="indefinite" rotate="auto" begin="0.9s"><mpath href="#arc-uk"/></animateMotion></g>
+      </g>
+     </svg>
+     <div class="map-caption"><span class="live-dot"></span><span>Live Routes · Click a destination</span></div>
+    </div>
+    <div class="float-card a"><span class="dot"></span> Visa Approved!</div>
+    <div class="float-card b">🌍 5 Destinations</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<div class="ticker" id="ticker"><div class="ticker-track" id="tickerTrack"></div></div>
+
+<!-- TRUST -->
+<section class="trust"><div class="container trust-grid stagger reveal">
+ <div class="trust-item"><div class="trust-icon">✥</div><div><b>Expert Guidance</b><span>End-to-end support</span></div></div>
+ <div class="trust-item"><div class="trust-icon">✓</div><div><b>Transparent Process</b><span>No hidden fees</span></div></div>
+ <div class="trust-item"><div class="trust-icon">♧</div><div><b>Global Network</b><span>5 key destinations</span></div></div>
+ <div class="trust-item"><div class="trust-icon">♡</div><div><b>Dedicated Support</b><span>Always with you</span></div></div>
+</div></section>
+
+<!-- PARTNERS -->
+<section class="partners">
+ <div class="partners-label">Trusted by universities, employers & partners worldwide</div>
+ <div class="partners-track" id="partnersTrack"></div>
+</section>
+
+<!-- COUNTRIES -->
+<section class="section" id="countries"><div class="container">
+ <div class="section-head reveal">
+  <div><div class="kicker">Featured Destinations</div><h2>Explore Your Dream Destination</h2></div>
+  <p>Discover your options, understand the pathways, and explore real stories from people who started their journey with us.</p>
+ </div>
+ <div class="dest-slider reveal" id="destSlider">
+  <article class="dest-card tilt" id="card-usa">
+   <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1522083165195-3424ed129620?auto=format&fit=crop&w=800&q=80')"></div>
+   <div class="dest-body"><span class="flag">🇺🇸</span><h3>USA</h3><p>Study · Work · PR · Visit</p>
+    <div class="stats"><div><b data-count="98" data-suffix="%">0%</b><span>Visa success rate</span></div>
+      <div><b data-count="9" data-suffix="K+">0K+</b><span>Clients assisted</span></div></div>
+    <span class="arrow">→</span></div>
+   <div class="glare"></div>
+   <a class="dest-link" href="https://www.uscis.gov/" target="_blank" rel="noopener noreferrer"></a>
+  </article>
+  <article class="dest-card tilt" id="card-ca">
+   <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1517935706615-2717063c2225?auto=format&fit=crop&w=800&q=80')"></div>
+   <div class="dest-body"><span class="flag">🇨🇦</span><h3>Canada</h3><p>Study · Work · PR · Visit</p>
+    <div class="stats"><div><b data-count="96" data-suffix="%">0%</b><span>Visa success rate</span></div>
+      <div><b data-count="4" data-suffix="K+">0K+</b><span>Clients assisted</span></div></div>
+    <span class="arrow">→</span></div>
+   <div class="glare"></div>
+   <a class="dest-link" href="https://www.canada.ca/en/immigration-refugees-citizenship.html" target="_blank" rel="noopener noreferrer"></a>
+  </article>
+  <article class="dest-card tilt" id="card-au">
+   <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&w=800&q=80')"></div>
+   <div class="dest-body"><span class="flag">🇦🇺</span><h3>Australia</h3><p>Study · Work · PR · Visit</p>
+    <div class="stats"><div><b data-count="94" data-suffix="%">0%</b><span>Visa success rate</span></div>
+      <div><b data-count="3" data-suffix="K+">0K+</b><span>Clients assisted</span></div></div>
+    <span class="arrow">→</span></div>
+   <div class="glare"></div>
+   <a class="dest-link" href="https://immi.homeaffairs.gov.au/" target="_blank" rel="noopener noreferrer"></a>
+  </article>
+  <article class="dest-card tilt" id="card-nz">
+   <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1469521669194-babb45599def?auto=format&fit=crop&w=800&q=80')"></div>
+   <div class="dest-body"><span class="flag">🇳🇿</span><h3>New Zealand</h3><p>Study · Work · PR · Visit</p>
+    <div class="stats"><div><b data-count="92" data-suffix="%">0%</b><span>Visa success rate</span></div>
+      <div><b data-count="2" data-suffix="K+">0K+</b><span>Clients assisted</span></div></div>
+    <span class="arrow">→</span></div>
+   <div class="glare"></div>
+   <a class="dest-link" href="https://www.immigration.govt.nz/" target="_blank" rel="noopener noreferrer"></a>
+  </article>
+  <article class="dest-card tilt" id="card-uk">
+   <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80')"></div>
+   <div class="dest-body"><span class="flag">🇬🇧</span><h3>UK</h3><p>Study · Work · PR · Visit</p>
+    <div class="stats"><div><b data-count="94" data-suffix="%">0%</b><span>Visa success rate</span></div>
+      <div><b data-count="3" data-suffix="K+">0K+</b><span>Clients assisted</span></div></div>
+    <span class="arrow">→</span></div>
+   <div class="glare"></div>
+   <a class="dest-link" href="https://www.gov.uk/browse/visas-immigration" target="_blank" rel="noopener noreferrer"></a>
+  </article>
+ </div>
+ <div class="slider-nav">
+  <button id="slidePrev" aria-label="Previous">←</button>
+  <button id="slideNext" aria-label="Next">→</button>
+ </div>
+</div></section>
+
+<!-- PATH -->
+<section class="section alt"><div class="container path-grid">
+ <div class="path-copy reveal">
+  <div class="kicker">Find Your Path</div>
+  <h2>What Are You Looking For?</h2>
+  <p>Tell us what you're looking for, and we'll help you find the best immigration pathway for you.</p>
+  <button class="btn blue magnetic" data-open-eligibility>Take the Next Step <span class="arrow">→</span></button>
+ </div>
+ <div class="path-cards stagger reveal">
+  <a class="path-card tilt" href="https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada.html" target="_blank" rel="noopener noreferrer">
+    <div class="path-img" style="background-image:url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=700&q=80')"></div>
+    <div class="path-body"><div class="emoji">🎓</div><strong>Study Abroad</strong><span>Get world-class education and global exposure.</span></div>
+    <div class="glare"></div></a>
+  <a class="path-card tilt" href="https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada.html" target="_blank" rel="noopener noreferrer">
+    <div class="path-img" style="background-image:url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=700&q=80')"></div>
+    <div class="path-body"><div class="emoji">💼</div><strong>Work Abroad</strong><span>Build your career internationally.</span></div>
+    <div class="glare"></div></a>
+  <a class="path-card tilt" href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada.html" target="_blank" rel="noopener noreferrer">
+    <div class="path-img" style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&q=80')"></div>
+    <div class="path-body"><div class="emoji">🏠</div><strong>Permanent Residency</strong><span>Settle for a better future.</span></div>
+    <div class="glare"></div></a>
+  <a class="path-card tilt" href="https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada.html" target="_blank" rel="noopener noreferrer">
+    <div class="path-img" style="background-image:url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=700&q=80')"></div>
+    <div class="path-body"><div class="emoji">✈️</div><strong>Visit Visa</strong><span>Explore the world with your loved ones.</span></div>
+    <div class="glare"></div></a>
+ </div>
+</div></section>
+
+<!-- SERVICES -->
+<section class="section" id="services"><div class="container">
+ <div class="section-head reveal">
+  <div><div class="kicker">Our Services</div><h2>Comprehensive Immigration Services</h2></div>
+  <p>From initial consultation to final approval, we provide end-to-end support for your immigration needs.</p>
+ </div>
+ <div class="services stagger reveal">
+  <article class="service tilt">
+   <div class="service-img" style="background-image:url('https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?auto=format&fit=crop&w=700&q=80')"></div>
+   <div class="service-body"><h3>Study Abroad</h3><ul><li>University selection</li><li>Application support</li><li>Visa assistance</li></ul>
+    <a class="learn" href="https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada.html" target="_blank" rel="noopener noreferrer">Learn More <span>→</span></a></div>
+   <div class="glare"></div>
+  </article>
+  <article class="service tilt">
+   <div class="service-img" style="background-image:url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=700&q=80')"></div>
+   <div class="service-body"><h3>Work Abroad</h3><ul><li>Work permits</li><li>Employer pathways</li><li>Documentation</li></ul>
+    <a class="learn" href="https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada.html" target="_blank" rel="noopener noreferrer">Learn More <span>→</span></a></div>
+   <div class="glare"></div>
+  </article>
+  <article class="service tilt">
+   <div class="service-img" style="background-image:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=700&q=80')"></div>
+   <div class="service-body"><h3>Permanent Residency</h3><ul><li>Profile assessment</li><li>Eligibility check</li><li>Application guidance</li></ul>
+    <a class="learn" href="https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada.html" target="_blank" rel="noopener noreferrer">Learn More <span>→</span></a></div>
+   <div class="glare"></div>
+  </article>
+  <article class="service tilt">
+   <div class="service-img" style="background-image:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=700&q=80')"></div>
+   <div class="service-body"><h3>Visitor Visa</h3><ul><li>Tourism visits</li><li>Family visits</li><li>Business visits</li></ul>
+    <a class="learn" href="https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada.html" target="_blank" rel="noopener noreferrer">Learn More <span>→</span></a></div>
+   <div class="glare"></div>
+  </article>
+ </div>
+</div></section>
+
+<!-- PROCESS -->
+<section class="section process"><div class="container process-grid">
+ <div class="process-photo reveal"></div>
+ <div class="reveal">
+  <div class="kicker">Simple & Clear</div>
+  <h2>How It Works</h2>
+  <p style="color:var(--muted);margin:14px 0 30px">A step-by-step process designed to make your immigration journey smooth and stress-free.</p>
+  <div class="steps stagger reveal" id="stepsWrap">
+   <div class="step"><div class="step-num">01</div><h3>Discovery</h3><p>Understand your goals and profile.</p></div>
+   <div class="step"><div class="step-num">02</div><h3>Eligibility Check</h3><p>Assess your profile and documents.</p></div>
+   <div class="step"><div class="step-num">03</div><h3>Strategy</h3><p>Choose the best pathway.</p></div>
+   <div class="step"><div class="step-num">04</div><h3>Documentation</h3><p>Prepare and review documents.</p></div>
+   <div class="step"><div class="step-num">05</div><h3>Application</h3><p>Submit and track your application.</p></div>
+   <div class="step"><div class="step-num">06</div><h3>Decision</h3><p>Get closer to your dreams.</p></div>
+  </div>
+ </div>
+</div></section>
+
+<!-- STORIES -->
+<section class="section stories" id="stories"><div class="container">
+ <div class="section-head reveal">
+  <div><div class="kicker">Real People. Real Journeys.</div><h2>Success Stories</h2></div>
+  <p>Hear from our clients who turned their dreams into reality with our guidance and support.</p>
+ </div>
+ <div class="story-grid stagger reveal">
+  <article class="story tilt">
+   <div class="story-top"><div class="avatar" style="background-image:url('https://i.pravatar.cc/100?img=12')"></div><div><b>🇺🇸 USA</b><small>Work Visa</small></div></div>
+   <p>"Vardhaan Immigration made our dream of living in the USA a reality. The team was supportive at every step."</p>
+   <small>Amit & Neha Sharma</small><div class="glare"></div></article>
+  <article class="story tilt">
+   <div class="story-top"><div class="avatar" style="background-image:url('https://i.pravatar.cc/100?img=11')"></div><div><b>🇨🇦 Canada</b><small>Permanent Residency</small></div></div>
+   <p>"Professional, transparent and truly caring. We got our PR approved in less than 8 months."</p>
+   <small>Rohit Verma</small><div class="glare"></div></article>
+  <article class="story tilt">
+   <div class="story-top"><div class="avatar" style="background-image:url('https://i.pravatar.cc/100?img=47')"></div><div><b>🇦🇺 Australia</b><small>Student Visa</small></div></div>
+   <p>"The guidance and support we received was outstanding. Highly recommend Vardhaan Immigration."</p>
+   <small>Sneha Kapoor</small><div class="glare"></div></article>
+ </div>
+</div></section>
+
+<section class="trust"><div class="container numbers stagger reveal">
+ <div class="number"><b data-count="10" data-suffix="+">0+</b><span>Years of Experience</span></div>
+ <div class="number"><b data-count="5000" data-suffix="+">0+</b><span>Happy Clients</span></div>
+ <div class="number"><b data-count="5">0</b><span>Countries</span></div>
+ <div class="number"><b data-count="98" data-suffix="%">0%</b><span>Success Rate</span></div>
+</div></section>
+
+<section class="section" id="about"><div class="container why-grid">
+ <div class="reveal">
+  <div class="kicker">Why Choose Us</div>
+  <h2>Your Goals. Our Commitment.</h2>
+  <p style="color:var(--muted);margin-top:15px">We go beyond paperwork. We're your partners in building a better future abroad.</p>
+  <div class="why-list stagger reveal">
+   <div class="why-item"><i>✓</i><div><b>Trusted & Certified</b><span>Recognized and reliable.</span></div></div>
+   <div class="why-item"><i>◈</i><div><b>End-to-End Support</b><span>From start to your visa.</span></div></div>
+   <div class="why-item"><i>◎</i><div><b>Personalized Guidance</b><span>Tailored to your profile.</span></div></div>
+   <div class="why-item"><i>◇</i><div><b>Ethical & Transparent</b><span>No hidden costs.</span></div></div>
+  </div>
+ </div>
+ <div class="why-art reveal"></div>
+</div></section>
+
+<section class="section alt"><div class="container explorer">
+ <div class="reveal">
+  <div class="kicker">Explore Countries</div>
+  <h2>Find the Right Destination</h2>
+  <p style="color:var(--muted);margin-top:12px">Compare countries, explore visa options and get expert guidance.</p>
+  <div class="country-list stagger reveal">
+   <button class="country-pill active">🇺🇸 USA</button>
+   <button class="country-pill">🇨🇦 Canada</button>
+   <button class="country-pill">🇦🇺 Australia</button>
+   <button class="country-pill">🇳🇿 New Zealand</button>
+   <button class="country-pill">🇬🇧 UK</button>
+  </div>
+ </div>
+ <div class="faq reveal" id="faq">
+  <div>
+   <div class="kicker">FAQs</div>
+   <h2>Frequently Asked Questions</h2>
+   <p style="color:var(--muted);margin-top:12px;font-size:13px">Quick answers to help you make informed decisions.</p>
+  </div>
+  <div class="faq-list">
+   <div class="faq-item"><div class="faq-q">How long does the immigration process take?<span>+</span></div>
+    <div class="faq-a">Processing times vary by country, visa category and individual application. Our team can explain the current pathway and documentation requirements.</div></div>
+   <div class="faq-item"><div class="faq-q">What are the eligibility requirements for each country?<span>+</span></div>
+    <div class="faq-a">Requirements depend on the pathway. We assess your profile, goals and documents before recommending relevant options.</div></div>
+   <div class="faq-item"><div class="faq-q">Which documents do I need to apply?<span>+</span></div>
+    <div class="faq-a">Typical requirements can include identity, education, employment, financial and supporting documents, depending on the visa.</div></div>
+   <div class="faq-item"><div class="faq-q">Can I apply if I have a previous refusal?<span>+</span></div>
+    <div class="faq-a">A previous refusal does not automatically answer whether a future application is possible; the refusal reason and new evidence need to be reviewed.</div></div>
+  </div>
+ </div>
+</div></section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact"><div class="container">
+ <div class="section-head reveal">
+  <div><div class="kicker">Get In Touch</div><h2>Ready to Take the Next Step?</h2></div>
+  <p>Not sure which country is right for you? Talk to our experts and get a personalized consultation based on your profile and goals.</p>
+ </div>
+ <div class="contact-grid">
+  <div class="reveal">
+   <div class="contact-info-block">
+    <a class="contact-line" href="mailto:Vardhaanvisa7@gmail.com"><div class="ci-icon">✉️</div>
+     <div><span class="ci-label">Email Us</span><strong>Vardhaanvisa7@gmail.com</strong></div></a>
+    <a class="contact-line" href="tel:+917206359268"><div class="ci-icon">📞</div>
+     <div><span class="ci-label">Call Us</span><strong>+91 72063 59268</strong></div></a>
+    <a class="contact-line" href="https://wa.me/919253492877" target="_blank" rel="noopener noreferrer"><div class="ci-icon">💬</div>
+     <div><span class="ci-label">WhatsApp Chat</span><strong>+91 92534 92877</strong></div></a>
+    <div class="contact-line"><div class="ci-icon">📍</div>
+     <div><span class="ci-label">Visit Our Office</span><strong>Shakti Nagar, Manav Chowk, Ambala City, Haryana</strong></div></div>
+   </div>
+   <div class="map-wrap" style="margin-top:16px">
+    <iframe src="https://www.google.com/maps?q=Shakti+Nagar,+Manav+Chowk,+Ambala+City,+Haryana&output=embed"
+      loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Vardhaan Immigration Office" allowfullscreen></iframe>
+    <div class="map-caption-line"><span>📍</span>
+     <span><strong>Our Office:</strong> Shakti Nagar, Manav Chowk, Ambala City, Haryana</span></div>
+   </div>
+  </div>
+  <div class="contact-cta-card reveal">
+   <h3>Start Your Journey Today</h3>
+   <p>Book a free consultation and let us help you plan your path abroad — whether it's Study, Work, PR, or Visit.</p>
+   <button class="btn solid-white magnetic" data-open-eligibility>Book Free Consultation <span class="arrow">→</span></button>
+   <a class="btn ghost magnetic" href="https://wa.me/919253492877" target="_blank" rel="noopener noreferrer">Chat on WhatsApp <span class="arrow">→</span></a>
+  </div>
+ </div>
+</div></section>
+</main>
+
+<footer><div class="container footer-grid">
+ <div>
+  <a class="logo footer-logo" href="#"><div class="logo-mark" style="border-color:#fff">V</div>
+   <div>VARDHAAN<small style="color:#9fb3c7">IMMIGRATION</small></div></a>
+  <p style="margin-top:15px">Your Dream. Our Direction.</p>
+  <p style="margin-top:16px;font-size:12px;color:#b8c8d8;line-height:1.7">
+    <strong style="color:#fff;display:block;margin-bottom:6px">Contact</strong>
+    <a href="mailto:Vardhaanvisa7@gmail.com" style="display:inline-block;margin:0 0 4px">Vardhaanvisa7@gmail.com</a><br>
+    <a href="tel:+917206359268" style="display:inline-block;margin:0 0 4px">📞 +91 72063 59268</a><br>
+    <a href="https://wa.me/919253492877" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin:0">💬 WhatsApp: +91 92534 92877</a><br>
+    <span style="display:inline-block;margin-top:6px;color:#9fb3c7">📍 Shakti Nagar, Manav Chowk,<br>Ambala City, Haryana</span>
+  </p>
+ </div>
+ <div><h4>Explore</h4><a href="#countries">Countries</a><a href="#services">Services</a><a href="#stories">Success Stories</a></div>
+ <div><h4>Company</h4><a href="#about">About Us</a><a href="#faq">FAQs</a><a href="#contact">Contact</a></div>
+ <div><h4>Destinations</h4><a href="#countries">USA</a><a href="#countries">Canada</a><a href="#countries">Australia</a><a href="#countries">New Zealand</a><a href="#countries">UK</a></div>
+</div>
+<div class="container copyright">
+ <span>© 2026 Vardhaan Immigration. All rights reserved.</span>
+ <span>Privacy Policy · Terms & Conditions</span>
+</div></footer>
+
+<a class="wa" href="https://wa.me/919253492877" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.6 6.32A8.45 8.45 0 0 0 12 4a8.5 8.5 0 0 0-7.36 12.75L3 21l4.4-1.6A8.5 8.5 0 0 0 12 20.5a8.5 8.5 0 0 0 5.6-14.18ZM12 19a6.9 6.9 0 0 1-3.5-.95l-.25-.15-2.6.94.94-2.54-.16-.26A6.9 6.9 0 0 1 5.1 12a6.9 6.9 0 1 1 6.9 7Zm3.8-5.15c-.2-.1-1.2-.6-1.4-.66-.2-.07-.34-.1-.48.1s-.55.7-.68.84-.25.16-.46.05a5.65 5.65 0 0 1-1.67-1.03 6.25 6.25 0 0 1-1.16-1.44c-.12-.2 0-.31.09-.41s.2-.25.31-.37a1.4 1.4 0 0 0 .2-.34.38.38 0 0 0 0-.36c-.05-.1-.48-1.16-.66-1.59-.17-.42-.35-.36-.48-.37h-.4a.78.78 0 0 0-.57.27 2.4 2.4 0 0 0-.75 1.78 4.15 4.15 0 0 0 .87 2.2 9.55 9.55 0 0 0 3.67 3.23 12.4 12.4 0 0 0 1.22.45 2.94 2.94 0 0 0 1.35.09 2.2 2.2 0 0 0 1.45-1.03 1.8 1.8 0 0 0 .12-1.03c-.05-.1-.18-.15-.38-.25Z"/></svg>
+</a>
+
+<!-- MOBILE STICKY BAR -->
+<div class="mobile-bar" id="mobileBar">
+ <div class="mobile-bar-inner">
+  <a href="tel:+917206359268"><span>📞</span>Call Us</a>
+  <a href="https://wa.me/919253492877" target="_blank" rel="noopener noreferrer"><span>💬</span>WhatsApp</a>
+  <button class="primary" data-open-eligibility style="color:#fff;background:linear-gradient(135deg,var(--blue),#1260c9);border-radius:12px;font:inherit;font-size:10px;font-weight:700;padding:8px 6px;min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px"><span style="font-size:18px;line-height:1">✈️</span>Book Free</button>
+ </div>
+</div>
+
+<!-- ELIGIBILITY MODAL -->
+<div class="modal-overlay" id="eligibilityModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+ <div class="modal" id="modalCard">
+  <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+  <div class="modal-progress"><div class="modal-progress-bar" id="modalProgress"></div></div>
+  <div class="modal-step active" data-step="1">
+   <div class="modal-kicker">Step 1 of 4</div>
+   <h3 id="modalTitle">Which country interests you?</h3>
+   <div class="option-grid" data-field="country">
+    <button class="option-btn" data-value="USA"><span class="o-emoji">🇺🇸</span> USA</button>
+    <button class="option-btn" data-value="Canada"><span class="o-emoji">🇨🇦</span> Canada</button>
+    <button class="option-btn" data-value="Australia"><span class="o-emoji">🇦🇺</span> Australia</button>
+    <button class="option-btn" data-value="New Zealand"><span class="o-emoji">🇳🇿</span> New Zealand</button>
+    <button class="option-btn" data-value="UK"><span class="o-emoji">🇬🇧</span> UK</button>
+    <button class="option-btn" data-value="Not sure yet"><span class="o-emoji">🌍</span> Not sure yet</button>
+   </div>
+  </div>
+  <div class="modal-step" data-step="2">
+   <div class="modal-kicker">Step 2 of 4</div>
+   <h3>What is your primary goal?</h3>
+   <div class="option-grid" data-field="service">
+    <button class="option-btn" data-value="Study"><span class="o-emoji">🎓</span> Study</button>
+    <button class="option-btn" data-value="Work"><span class="o-emoji">💼</span> Work</button>
+    <button class="option-btn" data-value="PR"><span class="o-emoji">🏠</span> Permanent Residency</button>
+    <button class="option-btn" data-value="Visit"><span class="o-emoji">✈️</span> Visit / Tourist</button>
+   </div>
+  </div>
+  <div class="modal-step" data-step="3">
+   <div class="modal-kicker">Step 3 of 4</div>
+   <h3>Tell us about yourself</h3>
+   <div class="input-group"><input type="text" id="mName" placeholder="Full name" required autocomplete="name"></div>
+   <div class="input-group"><input type="tel" id="mPhone" placeholder="Phone number" required autocomplete="tel" inputmode="tel"></div>
+   <div class="input-group"><input type="email" id="mEmail" placeholder="Email address" required autocomplete="email" inputmode="email"></div>
+  </div>
+  <div class="modal-step" data-step="4">
+   <div class="modal-kicker">Final Step</div>
+   <h3>Anything else we should know?</h3>
+   <div class="input-group"><textarea id="mMessage" rows="4" placeholder="Optional — share your goals, timeline, or questions..."></textarea></div>
+   <p style="font-size:12px;color:var(--muted);margin-top:10px;line-height:1.55">
+     By submitting, you agree to be contacted by Vardhaan Immigration via phone, email or WhatsApp.
+   </p>
+  </div>
+  <div class="modal-nav">
+   <button class="mb-back" id="modalBack" style="visibility:hidden">← Back</button>
+   <button class="mb-next" id="modalNext" disabled>Next →</button>
+  </div>
+ </div>
+</div>
+
+<div class="notif-stack" id="notifStack" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   MOTION SYSTEM
+   ============================================================ */
+
+/* 1. SCROLL PROGRESS */
+const scrollBar = document.getElementById("scrollBar");
+let lastScrollY = 0;
+function updateScrollBar(){
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  scrollBar.style.width = pct + "%";
+}
+window.addEventListener("scroll", updateScrollBar, { passive:true });
+updateScrollBar();
+
+/* 2. CURSOR FOLLOWER: dot + lagging ring */
+const cursorDot = document.getElementById("cursorDot");
+const cursorRing = document.getElementById("cursorRing");
+const cursorGlow = document.getElementById("cursorGlow");
+if (window.matchMedia("(hover:hover) and (min-width:901px)").matches){
+  let dotX = window.innerWidth/2, dotY = window.innerHeight/2;
+  let ringX = dotX, ringY = dotY;
+  let glowX = dotX, glowY = dotY;
+  window.addEventListener("mousemove", e => { dotX = e.clientX; dotY = e.clientY; });
+  (function loop(){
+    cursorDot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%,-50%)`;
+    ringX += (dotX - ringX) * 0.18;
+    ringY += (dotY - ringY) * 0.18;
+    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%,-50%)`;
+    glowX += (dotX - glowX) * 0.12;
+    glowY += (dotY - glowY) * 0.12;
+    cursorGlow.style.left = glowX + "px";
+    cursorGlow.style.top = glowY + "px";
+    requestAnimationFrame(loop);
+  })();
+
+  // Hover on interactive elements
+  const interactiveSel = "a, button, .dest-card, .path-card, .service, .story, .country-pill, .faq-q, .theme-toggle, input, textarea, select, .partner";
+  document.querySelectorAll(interactiveSel).forEach(el => {
+    el.addEventListener("mouseenter", () => {
+      cursorRing.classList.add("hovered"); cursorDot.classList.add("hovered");
+    });
+    el.addEventListener("mouseleave", () => {
+      cursorRing.classList.remove("hovered"); cursorDot.classList.remove("hovered");
+    });
+  });
+  document.addEventListener("mousedown", () => cursorRing.classList.add("pressed"));
+  document.addEventListener("mouseup", () => cursorRing.classList.remove("pressed"));
+}
+
+/* 3. RIPPLE ON BUTTONS */
+document.addEventListener("click", e => {
+  const target = e.target.closest(".btn, .option-btn, .country-pill, .faq-q, .slider-nav button, .mobile-bar a, .mobile-bar button");
+  if (!target) return;
+  const rect = target.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  const ripple = document.createElement("span");
+  ripple.className = "ripple";
+  ripple.style.width = ripple.style.height = size + "px";
+  ripple.style.left = (e.clientX - rect.left - size/2) + "px";
+  ripple.style.top = (e.clientY - rect.top - size/2) + "px";
+  target.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 750);
+});
+
+/* 4. SCROLL REVEALS */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add("visible"); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+document.querySelectorAll(".reveal, .stagger").forEach(el => observer.observe(el));
+
+/* 5. SPLIT-TEXT HEADINGS */
+document.querySelectorAll(".section h2").forEach(h => {
+  const words = h.textContent.trim().split(/\s+/);
+  h.innerHTML = words.map((w, i) => `<span class="sw" style="--i:${i}">${w}</span>`).join(" ");
+});
+const h2Observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add("sw-in"); h2Observer.unobserve(e.target); }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll(".section h2").forEach(h => h2Observer.observe(h));
+
+/* 6. WORD-BY-WORD SCROLL HIGHLIGHT for section headings */
+document.querySelectorAll(".section h2").forEach(h => {
+  // skip — already handled by split-text above; enable a "highlight glow" mode on scroll
+  const words = h.querySelectorAll(".sw");
+  h._words = words;
+});
+let highlightTicking = false;
+function updateWordHighlights(){
+  document.querySelectorAll(".section h2").forEach(h => {
+    const r = h.getBoundingClientRect();
+    const vh = window.innerHeight;
+    // progress from 0 (entering) to 1 (fully centered)
+    const progress = Math.max(0, Math.min(1, (vh - r.top) / (vh * 0.85)));
+    const count = h._words.length;
+    const shown = Math.floor(progress * count);
+    h._words.forEach((w, i) => {
+      w.classList.toggle("highlight", i < shown && progress > 0.15);
+    });
+  });
+  highlightTicking = false;
+}
+window.addEventListener("scroll", () => {
+  if (!highlightTicking){
+    highlightTicking = true;
+    requestAnimationFrame(updateWordHighlights);
+  }
+}, { passive:true });
+updateWordHighlights();
+
+/* 7. ANIMATED COUNTERS (with tabular numbers to avoid jitter) */
+function animateCount(el){
+  const target = parseInt(el.dataset.count, 10);
+  const suffix = el.dataset.suffix || "";
+  const duration = 1800, start = performance.now();
+  (function tick(now){
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(target * eased).toLocaleString() + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  })(performance.now());
+}
+const counterObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting){ animateCount(e.target); counterObserver.unobserve(e.target); }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll("[data-count]").forEach(el => counterObserver.observe(el));
+
+/* 8. NAV SCROLL STATE */
+const navbar = document.getElementById("navbar");
+function updateNav(){
+  if (window.scrollY > 60) navbar.classList.add("scrolled");
+  else navbar.classList.remove("scrolled");
+}
+window.addEventListener("scroll", updateNav, { passive:true });
+updateNav();
+
+/* 9. HERO MAP 3D TILT + PARALLAX on float cards */
+const heroArt = document.getElementById("heroArt");
+const mapScene = document.getElementById("mapScene");
+const floatA = document.querySelector(".float-card.a");
+const floatB = document.querySelector(".float-card.b");
+if (heroArt && mapScene && window.matchMedia("(hover:hover)").matches){
+  heroArt.addEventListener("mousemove", e => {
+    const r = heroArt.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    mapScene.style.transform = `rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
+    if (floatA) floatA.style.setProperty("--px", (x * 20) + "px");
+    if (floatB) floatB.style.setProperty("--px", (x * -20) + "px");
+  });
+  heroArt.addEventListener("mouseleave", () => { mapScene.style.transform = ""; });
+}
+
+/* 10. HERO PARALLAX on scroll */
+const heroGlowTop = document.querySelector(".hero::before");
+window.addEventListener("scroll", () => {
+  if (window.scrollY < 800 && window.matchMedia("(hover:hover)").matches){
+    const y = window.scrollY;
+    if (heroArt) heroArt.style.transform = `translateY(${y * 0.06}px)`;
+  }
+}, { passive:true });
+
+/* 11. KINETIC TICKER — speed driven by scroll velocity */
+const ticker = document.getElementById("ticker");
+let tickerTimeout;
+window.addEventListener("scroll", () => {
+  ticker.classList.add("fast");
+  clearTimeout(tickerTimeout);
+  tickerTimeout = setTimeout(() => ticker.classList.remove("fast"), 260);
+}, { passive:true });
+
+/* 12. CONTINENT TOOLTIP */
+const mapTooltip = document.getElementById("mapTooltip");
+document.querySelectorAll(".continent").forEach(cont => {
+  cont.addEventListener("mouseenter", () => {
+    mapTooltip.textContent = cont.dataset.region || "Region";
+    mapTooltip.classList.add("show");
+  });
+  cont.addEventListener("mouseleave", () => mapTooltip.classList.remove("show"));
+});
+
+/* 13. MARKER CLICK → scroll + highlight */
+const destSlider = document.getElementById("destSlider");
+function goToCard(cardId){
+  const card = document.getElementById(cardId);
+  if (!card || !destSlider) return;
+  destSlider.scrollTo({ left: card.offsetLeft - destSlider.offsetLeft, behavior: "smooth" });
+  const section = document.getElementById("countries");
+  const rect = section.getBoundingClientRect();
+  if (rect.top < 0 || rect.top > window.innerHeight - 200)
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+  document.querySelectorAll(".dest-card").forEach(c => c.classList.remove("highlight"));
+  card.classList.add("highlight");
+  setTimeout(() => card.classList.remove("highlight"), 2400);
+  haptic(15);
+}
+document.querySelectorAll(".marker").forEach(marker => {
+  const handler = () => goToCard(marker.dataset.card);
+  marker.addEventListener("click", handler);
+  marker.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " "){ e.preventDefault(); handler(); }
+  });
+});
+
+/* 14. 3D TILT with GLARE */
+document.querySelectorAll(".tilt").forEach(card => {
+  const glare = card.querySelector(".glare");
+  card.addEventListener("mousemove", e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = `perspective(1000px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-6px)`;
+    if (glare){
+      glare.style.setProperty("--mx", ((x + 0.5) * 100) + "%");
+      glare.style.setProperty("--my", ((y + 0.5) * 100) + "%");
+    }
+  });
+  card.addEventListener("mouseleave", () => { card.style.transform = ""; });
+});
+
+/* 15. DESTINATION SLIDER (mouse + touch + wheel) */
+const slider = destSlider;
+const prevBtn = document.getElementById("slidePrev");
+const nextBtn = document.getElementById("slideNext");
+function cardStep(){
+  const card = slider.querySelector(".dest-card");
+  if (!card) return 300;
+  const gap = parseFloat(getComputedStyle(slider).gap) || 16;
+  return card.offsetWidth + gap;
+}
+prevBtn.addEventListener("click", () => { slider.scrollBy({ left: -cardStep(), behavior: "smooth" }); haptic(8); });
+nextBtn.addEventListener("click", () => { slider.scrollBy({ left:  cardStep(), behavior: "smooth" }); haptic(8); });
+
+let isDown = false, startX = 0, startScroll = 0, dragged = false;
+slider.addEventListener("mousedown", e => { isDown = true; dragged = false; startX = e.pageX; startScroll = slider.scrollLeft; slider.classList.add("dragging"); });
+window.addEventListener("mouseup", () => { isDown = false; slider.classList.remove("dragging"); });
+slider.addEventListener("mouseleave", () => { isDown = false; slider.classList.remove("dragging"); });
+slider.addEventListener("mousemove", e => {
+  if (!isDown) return; e.preventDefault();
+  if (Math.abs(e.pageX - startX) > 6) dragged = true;
+  slider.scrollLeft = startScroll - (e.pageX - startX) * 1.4;
+});
+slider.addEventListener("click", e => { if (dragged){ e.preventDefault(); e.stopPropagation(); dragged = false; } }, true);
+slider.addEventListener("wheel", e => {
+  if (Math.abs(e.deltaY) > Math.abs(e.deltaX)){ e.preventDefault(); slider.scrollLeft += e.deltaY; }
+}, { passive:false });
+
+/* 16. PROCESS CONNECTOR */
+const stepsWrap = document.getElementById("stepsWrap");
+const stepObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add("active"); stepObserver.unobserve(e.target); } });
+}, { threshold: 0.4 });
+if (stepsWrap) stepObserver.observe(stepsWrap);
+
+/* 17. FAQ */
+document.querySelectorAll(".faq-q").forEach(q => {
+  q.addEventListener("click", () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains("open");
+    document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("open"));
+    if (!isOpen){ item.classList.add("open"); haptic(6); }
+  });
+});
+
+/* 18. COUNTRY PILLS */
+document.querySelectorAll(".country-pill").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".country-pill").forEach(x => x.classList.remove("active"));
+    btn.classList.add("active"); haptic(8);
+  });
+});
+
+/* 19. MAGNETIC BUTTONS (mouse only) */
+if (window.matchMedia("(hover:hover)").matches){
+  document.querySelectorAll(".magnetic").forEach(btn => {
+    btn.addEventListener("mousemove", e => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width/2;
+      const y = e.clientY - r.top - r.height/2;
+      btn.style.transform = `translate(${x * 0.18}px, ${y * 0.35 - 3}px)`;
+    });
+    btn.addEventListener("mouseleave", () => { btn.style.transform = ""; });
+  });
+}
+
+/* 20. TEXT SCRAMBLE on eyebrow */
+function scrambleText(el){
+  const final = el.dataset.scramble || el.textContent;
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%";
+  let iter = 0;
+  const total = final.length;
+  const speed = 24;
+  function run(){
+    let output = "";
+    for (let i = 0; i < total; i++){
+      if (i < iter) output += final[i];
+      else if (final[i] === " ") output += " ";
+      else output += chars[Math.floor(Math.random() * chars.length)];
+    }
+    el.textContent = output;
+    iter += 0.5;
+    if (iter < total + 2) setTimeout(run, speed);
+    else el.textContent = final;
+  }
+  run();
+}
+const eyebrow = document.querySelector("[data-scramble]");
+if (eyebrow){
+  setTimeout(() => scrambleText(eyebrow), 1200);
+}
+
+/* 21. TICKER */
+const tickerTrack = document.getElementById("tickerTrack");
+const tickerItems = ["Study Abroad","Work Permits","Permanent Residency","Visitor Visa",
+  "USA","Canada","Australia","New Zealand","UK","Transparent Process","Expert Guidance","End-to-End Support"];
+const tickerHTML = tickerItems.map(t => `<span>${t}</span>`).join("");
+tickerTrack.innerHTML = tickerHTML + tickerHTML;
+
+/* 22. PARTNERS MARQUEE */
+const partnersTrack = document.getElementById("partnersTrack");
+const partners = [
+  ["🎓","University of Toronto"],["🏛️","UBC Vancouver"],["🦘","University of Melbourne"],
+  ["🇬🇧","University of Manchester"],["🦅","Arizona State University"],["🌿","University of Auckland"],
+  ["💼","Deloitte"],["⚙️","Infosys"],["🔵","IBM"],["🟣","Accenture"],
+  ["🏥","NHS Trust"],["🚀","Tech Mahindra"]
+];
+const partnerHTML = partners.map(([e, n]) => `<div class="partner"><span class="p-emoji">${e}</span>${n}</div>`).join("");
+partnersTrack.innerHTML = partnerHTML + partnerHTML;
+
+/* 23. DARK MODE */
+const themeToggle = document.getElementById("themeToggle");
+const root = document.documentElement;
+const saved = localStorage.getItem("vardhaan-theme");
+if (saved === "dark") root.setAttribute("data-theme", "dark");
+themeToggle.addEventListener("click", () => {
+  const isDark = root.getAttribute("data-theme") === "dark";
+  if (isDark){ root.removeAttribute("data-theme"); localStorage.setItem("vardhaan-theme", "light"); }
+  else { root.setAttribute("data-theme", "dark"); localStorage.setItem("vardhaan-theme", "dark"); }
+  haptic(10);
+});
+
+/* 24. HAPTIC FEEDBACK */
+function haptic(ms = 10){
+  if ("vibrate" in navigator && !window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    try { navigator.vibrate(ms); } catch(e){}
+  }
+}
+
+/* 25. MOBILE BAR VISIBILITY */
+const mobileBar = document.getElementById("mobileBar");
+function updateMobileBar(){
+  if (window.innerWidth > 900){ mobileBar.classList.remove("show"); return; }
+  mobileBar.classList.toggle("show", window.scrollY > 500);
+}
+window.addEventListener("scroll", updateMobileBar, { passive:true });
+window.addEventListener("resize", updateMobileBar);
+updateMobileBar();
+
+/* 26. CONFETTI */
+function launchConfetti(){
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const canvas = document.createElement("canvas");
+  canvas.className = "confetti-canvas";
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext("2d");
+  const colors = ["#31b9ff","#20c878","#f59e0b","#0878e8","#ff7c2f","#7de3c6"];
+  const pieces = [];
+  const count = window.innerWidth < 600 ? 110 : 180;
+  for (let i = 0; i < count; i++){
+    pieces.push({
+      x: canvas.width/2 + (Math.random() - 0.5) * 100,
+      y: canvas.height/2 + (Math.random() - 0.5) * 60,
+      vx: (Math.random() - 0.5) * 22,
+      vy: (Math.random() - 1) * 22 - 4,
+      size: Math.random() * 8 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rot: Math.random() * 360,
+      vr: (Math.random() - 0.5) * 12,
+      life: 1
+    });
+  }
+  (function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = 0;
+    pieces.forEach(p => {
+      if (p.life <= 0) return;
+      alive++;
+      p.x += p.vx; p.y += p.vy; p.vy += 0.55; p.vx *= 0.99;
+      p.rot += p.vr; p.life -= 0.007;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot * Math.PI/180);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size * 0.6);
+      ctx.restore();
+    });
+    if (alive > 0) requestAnimationFrame(animate);
+    else canvas.remove();
+  })();
+}
+
+/* 27. MOBILE MENU */
+const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+const mobileMenuPanel = document.getElementById("mobileMenuPanel");
+const mobileMenuClose = document.getElementById("mobileMenuClose");
+function openMobileMenu(){
+  mobileMenuPanel.classList.add("open");
+  document.body.style.overflow = "hidden";
+  haptic(12);
+}
+function closeMobileMenu(){
+  mobileMenuPanel.classList.remove("open");
+  document.body.style.overflow = "";
+}
+mobileMenuBtn.addEventListener("click", openMobileMenu);
+mobileMenuClose.addEventListener("click", closeMobileMenu);
+mobileMenuPanel.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMobileMenu));
+
+/* 28. ELIGIBILITY MODAL */
+const modal = document.getElementById("eligibilityModal");
+const modalProgress = document.getElementById("modalProgress");
+const modalSteps = modal.querySelectorAll(".modal-step");
+const modalBack = document.getElementById("modalBack");
+const modalNext = document.getElementById("modalNext");
+const modalClose = document.getElementById("modalClose");
+const modalData = { country:"", service:"" };
+let currentStep = 1;
+const totalSteps = 4;
+
+function openModal(){
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+  currentStep = 1;
+  renderStep();
+  haptic(12);
+}
+function closeModal(){
+  modal.classList.remove("open");
+  document.body.style.overflow = "";
+}
+function renderStep(){
+  modalSteps.forEach(s => s.classList.toggle("active", +s.dataset.step === currentStep));
+  modalProgress.style.width = (currentStep / totalSteps) * 100 + "%";
+  modalBack.style.visibility = currentStep === 1 ? "hidden" : "visible";
+  modalNext.innerHTML = currentStep === totalSteps ? "Submit Request ✓" : "Next →";
+  validateStep();
+}
+function validateStep(){
+  let valid = true;
+  if (currentStep === 1) valid = !!modalData.country;
+  if (currentStep === 2) valid = !!modalData.service;
+  if (currentStep === 3){
+    valid = document.getElementById("mName").value.trim().length > 1 &&
+            document.getElementById("mPhone").value.trim().length > 5 &&
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("mEmail").value);
+  }
+  modalNext.disabled = !valid;
+}
+modal.querySelectorAll(".option-grid").forEach(grid => {
+  grid.querySelectorAll(".option-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      grid.querySelectorAll(".option-btn").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      modalData[grid.dataset.field] = btn.dataset.value;
+      validateStep();
+      haptic(8);
+    });
+  });
+});
+["mName","mPhone","mEmail"].forEach(id => {
+  document.getElementById(id).addEventListener("input", validateStep);
+});
+modalBack.addEventListener("click", () => { if (currentStep > 1){ currentStep--; renderStep(); haptic(6); } });
+modalNext.addEventListener("click", () => {
+  if (currentStep < totalSteps){ currentStep++; renderStep(); haptic(8); }
+  else {
+    modalNext.disabled = true;
+    modalNext.innerHTML = "Sending...";
+    setTimeout(() => {
+      closeModal();
+      launchConfetti();
+      haptic(50);
+      setTimeout(() => {
+        modal.querySelectorAll(".option-btn").forEach(b => b.classList.remove("selected"));
+        document.getElementById("mName").value = "";
+        document.getElementById("mPhone").value = "";
+        document.getElementById("mEmail").value = "";
+        document.getElementById("mMessage").value = "";
+        modalData.country = ""; modalData.service = "";
+        currentStep = 1; renderStep();
+      }, 400);
+    }, 700);
+  }
+});
+modalClose.addEventListener("click", closeModal);
+modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("open")) closeModal(); });
+document.querySelectorAll("[data-open-eligibility]").forEach(el => {
+  el.addEventListener("click", e => { e.preventDefault(); openModal(); });
+});
+
+/* 29. SMOOTH ANCHOR SCROLL */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener("click", e => {
+    const href = a.getAttribute("href");
+    if (href === "#" || href.length < 2) return;
+    const target = document.querySelector(href);
+    if (!target) return;
+    e.preventDefault();
+    const top = target.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: "smooth" });
+    closeMobileMenu();
+  });
+});
+
+/* 30. LIVE NOTIFICATIONS */
+const notifStack = document.getElementById("notifStack");
+const notifPool = [
+  { avatar:"https://i.pravatar.cc/100?img=15", name:"Arjun", text:"just applied for a Canada Study Visa", time:"Just now", type:"info" },
+  { avatar:"https://i.pravatar.cc/100?img=33", name:"Sachin", text:"visa has been approved! 🎉", time:"1 min ago", type:"success" },
+  { avatar:"https://i.pravatar.cc/100?img=45", name:"Priya", text:"is exploring Work Permit options in Canada", time:"3 min ago", type:"info" },
+  { avatar:"https://i.pravatar.cc/100?img=8",  name:"Rahul", text:"received his PR approval — congrats! 🇨🇦", time:"4 min ago", type:"success" },
+  { avatar:"https://i.pravatar.cc/100?img=23", name:"Neha", text:"booked a free consultation", time:"5 min ago", type:"info" },
+  { avatar:"https://i.pravatar.cc/100?img=52", name:"Vikram", text:"study permit just got approved! 🎓", time:"6 min ago", type:"success" },
+  { avatar:"https://i.pravatar.cc/100?img=29", name:"Ananya", text:"is checking eligibility for Canada PR", time:"7 min ago", type:"info" },
+  { avatar:"https://i.pravatar.cc/100?img=6",  name:"Karan", text:"submitted his Visitor Visa application", time:"8 min ago", type:"info" },
+  { avatar:"https://i.pravatar.cc/100?img=41", name:"Riya", text:"visa was approved in just 21 days! ✨", time:"9 min ago", type:"success" }
+];
+let notifIndex = 0;
+function showNotif(data){
+  const n = document.createElement("div");
+  n.className = "notif" + (data.type === "success" ? " success" : "");
+  n.innerHTML = `
+    <div class="notif-avatar" style="background-image:url('${data.avatar}')"></div>
+    <div class="notif-body">
+      <div class="notif-text"><strong>${data.name}</strong> ${data.text}</div>
+      <span class="notif-time">${data.time}</span>
+    </div>
+    <button class="notif-close" aria-label="Dismiss">✕</button>`;
+  notifStack.appendChild(n);
+  requestAnimationFrame(() => n.classList.add("in"));
+  n.querySelector(".notif-close").addEventListener("click", () => removeNotif(n));
+  setTimeout(() => removeNotif(n), 7000);
+}
+function removeNotif(n){
+  if (!n.parentElement) return;
+  n.classList.remove("in"); n.classList.add("out");
+  setTimeout(() => n.remove(), 500);
+}
+setTimeout(() => {
+  if (window.innerWidth > 900) showNotif(notifPool[notifIndex++ % notifPool.length]);
+  setInterval(() => {
+    if (document.hidden) return;
+    if (window.innerWidth <= 900 && Math.random() < 0.5) return;
+    showNotif(notifPool[notifIndex++ % notifPool.length]);
+  }, 11000);
+}, 5000);
+
+/* 31. TOUCH: swipe hint for slider on mobile */
+let sliderTouched = false;
+slider.addEventListener("touchstart", () => {
+  if (!sliderTouched && window.innerWidth <= 900){
+    sliderTouched = true;
+    // subtle hint: quick horizontal wobble on first touch
+    slider.animate(
+      [{ transform:"translateX(0)" }, { transform:"translateX(-6px)" }, { transform:"translateX(0)" }],
+      { duration: 380, easing: "ease-out" }
+    );
+  }
+}, { passive:true });
+
+/* 32. PAGE ENTRANCE CHOREOGRAPHY */
+document.body.classList.add("page-enter");
+window.addEventListener("load", () => {
+  requestAnimationFrame(() => document.body.classList.add("done"));
+  setTimeout(() => document.body.classList.remove("page-enter"), 1200);
+});
+setTimeout(() => document.body.classList.add("done"), 1500);
+</script>
+</body>
+</html>
